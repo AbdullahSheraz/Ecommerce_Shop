@@ -25,8 +25,6 @@ List<ProductModel> tilesProducts = [
     title: "Glossy White Wall Tiles",
     brandName: "TilePro",
     price: 750,
-
-   
     description:
         "Enhance your space with glossy white tiles. \nDurable and easy-to-clean surface. \nIdeal for kitchens and bathrooms. \nGives a sleek and modern look.",
   ),
@@ -35,7 +33,6 @@ List<ProductModel> tilesProducts = [
     title: "Matte Finish Black Tiles",
     brandName: "TileMaster",
     price: 1200,
-  
     description:
         "Premium matte black finish for elegance. \nNon-slip surface for extra safety. \nPerfect for indoor and outdoor use. \nResistant to stains and moisture.",
   ),
@@ -44,7 +41,6 @@ List<ProductModel> tilesProducts = [
     title: "Classic White Wall Tiles",
     brandName: "TilePro",
     price: 750,
-   
     description:
         "Classic white glossy tiles for bright interiors. \nSmooth finish with high durability. \nIdeal for modern and minimalistic designs. \nResists water and stains effectively.",
   ),
@@ -53,7 +49,6 @@ List<ProductModel> tilesProducts = [
     title: "Matte Finish Black Tiles",
     brandName: "TileMaster",
     price: 1200,
- 
     description:
         "Matte black tiles with anti-slip texture. \nAdds a bold and elegant touch to spaces. \nHighly resistant to scratches and moisture. \nPerfect for both residential and commercial use.",
   ),
@@ -63,7 +58,6 @@ List<ProductModel> tilesProducts = [
     title: "Beige Emboss Porcelain Tile",
     brandName: "Orient Ceramica",
     price: 2800,
-  
     description:
         "Elegant beige embossed texture for a natural stone look. \nDurable and scratch-resistant. \nIdeal for both indoor and outdoor applications. \nMoisture and stain-resistant surface.",
   ),
@@ -73,7 +67,6 @@ List<ProductModel> tilesProducts = [
     title: "L62080 Gloss Porcelain Tile",
     brandName: "Time Ceramics",
     price: 2100,
-
     description:
         "Glossy porcelain tiles for a luxurious finish. \nHighly durable and scratch-resistant. \nPerfect for living rooms, kitchens, and bathrooms. \nEasy to maintain and clean.",
   ),
@@ -92,7 +85,6 @@ List<ProductModel> tilesProducts = [
     title: "OR66055 Gloss Porcelain Tile",
     brandName: "Oreal Ceramics",
     price: 1550,
-   
     description:
         "Glossy surface with a luxurious feel. \nIdeal for residential and commercial interiors. \nStain-resistant and easy to clean. \nProvides an elegant touch to any space.",
   ),
@@ -123,7 +115,6 @@ List<ProductModel> floorTilesProducts = [
     title: "Vitrified-Glazed Matt Floor Tiles",
     brandName: "Stile",
     price: 900,
-
     description: "Elegant wood-like texture enhances the natural look.\n"
         "Water-resistant and scratch-proof for durability.\n"
         "Perfect for living rooms and bedrooms.\n"
@@ -168,7 +159,6 @@ List<ProductModel> floorTilesProducts = [
     title: "Macael White Gloss Porcelain Slab Tile",
     brandName: "Porcelux China",
     price: 6300,
-
     description: "Premium white marble-inspired porcelain slab.\n"
         "Reflective glossy finish for a luxurious touch.\n"
         "Scratch and water-resistant for lasting beauty.\n"
@@ -180,7 +170,6 @@ List<ProductModel> floorTilesProducts = [
     title: "Floral Ivory Motive Gloss Porcelain Tile",
     brandName: "Porcelux China",
     price: 900,
-
     description: "Unique floral-inspired ivory design.\n"
         "Glossy finish adds a sophisticated shine.\n"
         "Water-resistant and easy to maintain.\n"
@@ -203,7 +192,6 @@ List<ProductModel> floorTilesProducts = [
     title: "Natural Brown Print Matte Porcelain Tile",
     brandName: "Porcelux China",
     price: 2800,
-
     description: "Warm brown tone with a wood-like texture.\n"
         "Scratch-resistant and water-resistant.\n"
         "Matte finish provides a natural and authentic look.\n"
@@ -240,7 +228,6 @@ List<ProductModel> bathroomTilesProducts = [
     title: "Floral Ivory Motive Gloss Porcelain Tile",
     brandName: "Porcelux China",
     price: 900,
- 
     description: "Unique floral-inspired ivory design.\n"
         "Glossy finish adds a sophisticated shine.\n"
         "Water-resistant and easy to maintain.\n"
@@ -252,7 +239,6 @@ List<ProductModel> bathroomTilesProducts = [
     title: "Vitrified-Glazed Matt Floor Tiles",
     brandName: "Stile",
     price: 900,
-
     description: "Elegant wood-like texture enhances the natural look.\n"
         "Water-resistant and scratch-proof for durability.\n"
         "Perfect for living rooms and bedrooms.\n"
@@ -263,7 +249,6 @@ List<ProductModel> bathroomTilesProducts = [
     title: "Anti-Skid Bathroom Tiles",
     brandName: "SafeTiles",
     price: 500,
-
     description:
         "Slip-resistant tiles for safety. \nStylish and moisture-resistant. \nPerfect for wet areas like bathrooms. \nEnsures long-term durability.",
   ),
@@ -273,7 +258,6 @@ List<ProductModel> bathroomTilesProducts = [
     title: "L62080 Gloss Porcelain Tile",
     brandName: "Time Ceramics",
     price: 2100,
- 
     description:
         "Glossy porcelain tiles for a luxurious finish. \nHighly durable and scratch-resistant. \nPerfect for living rooms, kitchens, and bathrooms. \nEasy to maintain and clean.",
   ),
@@ -331,7 +315,6 @@ List<ProductModel> bathroomTilesProducts = [
     title: "Shower Area Ceramic Tiles",
     brandName: "AquaTiles",
     price: 600,
-
     description:
         "Perfect tiles for shower and wet areas. \nNon-porous and easy to maintain. \nProvides a sleek and elegant look. \nEnsures durability and slip resistance.",
   ),
@@ -342,7 +325,6 @@ List<ProductModel> importedTilesProducts = [
     title: "SFORZA Tiles",
     brandName: "Abu Yousaf Traders",
     price: 7950,
-
     description:
         "Elegant Italian marble-style tiles. \nPerfect for creating a luxurious ambiance. \nHighly durable and scratch-resistant. \nIdeal for both floors and walls.",
   ),
@@ -361,7 +343,6 @@ List<ProductModel> importedTilesProducts = [
     title: "TUSCANIA-LORETO Tiles",
     brandName: "Abu Yousaf Traders",
     price: 7950,
-  
     description:
         "Premium Italian-style tiles. \nSubtle and elegant veining for a timeless look. \nHighly resistant to stains and moisture. \nIdeal for high-traffic areas.",
   ),
@@ -371,7 +352,6 @@ List<ProductModel> importedTilesProducts = [
     title: "RICORDI-NERO Tiles",
     brandName: "Abu Yousaf Traders",
     price: 8950,
-
     description:
         "Sophisticated black marble-inspired tiles. \nCreates a bold and stylish interior. \nNon-slip and highly durable. \nPerfect for modern spaces.",
   ),
@@ -399,7 +379,6 @@ List<ProductModel> importedTilesProducts = [
     title: "DECOR-LEGEND Tiles",
     brandName: "Abu Yousaf Traders",
     price: 8800,
- 
     description:
         "Decorative tiles with an intricate pattern. \nAdds artistic charm to any space. \nMade from high-quality ceramic. \nPerfect for feature walls and floors.",
   ),
@@ -437,59 +416,102 @@ List<ProductModel> sanitaryWareProducts = [
     title: "Modern Wash Basin",
     brandName: "Sanitech",
     price: 1800,
-  
-    description: "Sleek and modern wash basin design. Made from high-quality ceramic. Scratch and stain-resistant. Perfect for contemporary bathrooms.",
+    description:
+        "Sleek and modern wash basin design. Made from high-quality ceramic. Scratch and stain-resistant. Perfect for contemporary bathrooms.",
   ),
   ProductModel(
     image: productDemoImg02,
     title: "Sanitary Wares",
     brandName: "AquaSan",
     price: 3500,
-
-    description: "High-quality sanitary ware collection. Designed for durability and comfort. Easy to clean and maintain. Perfect for modern washrooms.",
+    description:
+        "High-quality sanitary ware collection. Designed for durability and comfort. Easy to clean and maintain. Perfect for modern washrooms.",
   ),
   ProductModel(
     image: 'https://sanitariopk.com/cdn/shop/files/bs3.webp?v=1711519600',
     title: "Stainless Steel 304 Bathroom Hot and Cold Faucet Spot",
     brandName: "Sanitari",
     price: 7399,
- 
-    description: "Premium stainless steel faucet with hot and cold water functionality. Corrosion-resistant and durable. Adds a touch of elegance to any bathroom.",
+    description:
+        "Premium stainless steel faucet with hot and cold water functionality. Corrosion-resistant and durable. Adds a touch of elegance to any bathroom.",
   ),
   ProductModel(
-    image: 'https://sanitariopk.com/cdn/shop/products/81rsh001-8in-chr-a_1024x1024_2x_5bfb3a70-b96b-4d6e-a3a8-b1d67b9c77ff.webp?v=1682589147',
+    image:
+        'https://sanitariopk.com/cdn/shop/products/81rsh001-8in-chr-a_1024x1024_2x_5bfb3a70-b96b-4d6e-a3a8-b1d67b9c77ff.webp?v=1682589147',
     title: "Overhead Rain Shower – Stainless Steel",
     brandName: "Sanitari",
     price: 3500,
-    description: "Luxury overhead rain shower for a spa-like experience. Made from high-quality stainless steel. Ensures even water distribution for a refreshing bath.",
+    description:
+        "Luxury overhead rain shower for a spa-like experience. Made from high-quality stainless steel. Ensures even water distribution for a refreshing bath.",
   ),
   ProductModel(
-    image: 'https://sanitariopk.com/cdn/shop/products/51BuswCaMaL._AC_SL1001.webp?v=1684367265',
+    image:
+        'https://sanitariopk.com/cdn/shop/products/51BuswCaMaL._AC_SL1001.webp?v=1684367265',
     title: "Stainless Steel 304 Push Floor Drain Waste 6x6",
     brandName: "Sanitari",
     price: 2799,
-    description: "High-quality push floor drain made from stainless steel. Prevents clogging and ensures smooth water drainage. Rust and corrosion-resistant.",
+    description:
+        "High-quality push floor drain made from stainless steel. Prevents clogging and ensures smooth water drainage. Rust and corrosion-resistant.",
   ),
   ProductModel(
-    image: 'https://sanitariopk.com/cdn/shop/products/NewProductDevelopmenPostInstagram_42.jpg?v=1707154238',
+    image:
+        'https://sanitariopk.com/cdn/shop/products/NewProductDevelopmenPostInstagram_42.jpg?v=1707154238',
     title: "Stainless Steel Muslim Toilet Shower",
     brandName: "Sanitari",
     price: 3799,
-
-    description: "Ergonomic and hygienic toilet shower. Made of durable stainless steel. Provides a smooth and controlled water flow.",
+    description:
+        "Ergonomic and hygienic toilet shower. Made of durable stainless steel. Provides a smooth and controlled water flow.",
   ),
   ProductModel(
-    image: 'https://sanitariopk.com/cdn/shop/files/7_db052c9b-0c83-448d-afb5-950935aec48a.png?v=1741657316',
+    image:
+        'https://sanitariopk.com/cdn/shop/files/7_db052c9b-0c83-448d-afb5-950935aec48a.png?v=1741657316',
     title: "6-Piece Luxury Bathroom Accessories Set – Premium Quality",
     brandName: "Sanitari",
     price: 19999,
-    description: "Complete bathroom set including towel racks, soap dispensers, and more. Premium stainless steel construction. Ideal for modern and luxurious bathrooms.",
+    description:
+        "Complete bathroom set including towel racks, soap dispensers, and more. Premium stainless steel construction. Ideal for modern and luxurious bathrooms.",
   ),
   ProductModel(
-    image: 'https://www.britesanitaryware.com/wp-content/uploads/2024/06/p15.jpg',
+    image:
+        'https://www.britesanitaryware.com/wp-content/uploads/2024/06/p15.jpg',
     title: "Beauty One Piece Cito by Brite Sanitary Ware",
     brandName: "Sanitari",
     price: 18999,
-    description: "Premium one-piece toilet with a sleek and modern design. Made from high-grade ceramic for durability and easy maintenance. Comfortable and water-efficient.",
+    description:
+        "Premium one-piece toilet with a sleek and modern design. Made from high-grade ceramic for durability and easy maintenance. Comfortable and water-efficient.",
   ),
 ];
+
+class ProductModel0 {
+  final String code;
+  final String barcode;
+  final String title;
+  final String image;
+  final double price;
+  final String? description;
+  final String? brandName;
+  final double? priceAfetDiscount;
+
+  ProductModel0({
+    required this.code,
+    required this.barcode,
+    required this.title,
+    required this.image,
+    required this.price,
+    this.description,
+    this.brandName,
+    this.priceAfetDiscount,
+  });
+
+  factory ProductModel0.fromJson(Map<String, dynamic> json) {
+    return ProductModel0(
+      code: json['Item Code'] ?? '',
+      barcode: json['Barcode'] ?? '',
+      title: json['Item Description'] ?? '',
+      image: json['Image'] ?? '',
+      description: json['Item Description'] ?? '',
+      price: 10 + (json['Item Code'].hashCode % 90).toDouble(), // random-ish
+      brandName: "", // optional
+    );
+  }
+}

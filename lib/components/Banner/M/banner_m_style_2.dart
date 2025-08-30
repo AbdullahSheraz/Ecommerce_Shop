@@ -8,8 +8,8 @@ import '../../../constants.dart';
 class BannerMStyle2 extends StatelessWidget {
   const BannerMStyle2({
     super.key,
-    this.image = "https://img.freepik.com/premium-photo/seamless-pattern-with-marble-wooden-textures-ceramics-tiles-design_637851-436.jpg?uid=R154965348&ga=GA1.1.2076787137.1740126067&semt=ais_hybrid",
-    required this.title,
+    this.image =
+"assets/images/C2.jpg",    required this.title,
     required this.press,
     this.subtitle,
     required this.discountParcent,

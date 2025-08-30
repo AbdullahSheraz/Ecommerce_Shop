@@ -17,23 +17,34 @@ class ProfileMenuListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DividerListTile(
-      minLeadingWidth: 24,
-      leading: SvgPicture.asset(
-        svgSrc,
-        height: 24,
-        width: 24,
-        colorFilter: ColorFilter.mode(
-          Theme.of(context).iconTheme.color!,
-          BlendMode.srcIn,
+    return Column(
+      children: [
+        DividerListTile(
+          minLeadingWidth: 24,
+          leading: SvgPicture.asset(
+            svgSrc,
+            height: 24,
+            width: 24,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).iconTheme.color!,
+              BlendMode.srcIn,
+            ),
+          ),
+          title: Text(
+            text,
+            style: const TextStyle(fontSize: 14, height: 1),
+          ),
+          press: press,
+          isShowDivider: false,
         ),
-      ),
-      title: Text(
-        text,
-        style: const TextStyle(fontSize: 14, height: 1),
-      ),
-      press: press,
-      isShowDivider: isShowDivider,
+        if (isShowDivider)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Divider(
+              color: Colors.grey.withValues(alpha: 0.1),
+            ),
+          ),
+      ],
     );
   }
 }

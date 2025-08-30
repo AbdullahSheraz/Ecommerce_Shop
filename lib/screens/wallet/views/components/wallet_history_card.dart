@@ -72,10 +72,7 @@ class WalletHistoryCard extends StatelessWidget {
                 title: products[index].title,
                 price: products[index].price,
                 priceAfterDiscount: products[index].priceAfetDiscount,
-                style: ElevatedButton.styleFrom(
-                  maximumSize: const Size(double.infinity, 90),
-                  padding: EdgeInsets.zero,
-                ),
+               
               ),
             ),
           ),

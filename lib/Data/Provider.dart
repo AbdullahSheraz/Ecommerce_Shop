@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shop/models/product_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shop/models/product_model.dart';
 
 class CartItem {
   final String image;
@@ -17,7 +16,7 @@ class CartItem {
     required this.title,
     required this.price,
     required this.discountPrice,
-    this.quantity = 1, // ✅ Default quantity to 1
+    this.quantity = 1, 
   });
 
   CartItem copyWith({int? quantity}) {
@@ -95,3 +94,17 @@ class BookmarkNotifier extends StateNotifier<List<ProductModel>> {
 final bookmarkProvider = StateNotifierProvider<BookmarkNotifier, List<ProductModel>>((ref) {
   return BookmarkNotifier();
 });
+
+final selectedCategoryProvider = StateProvider<String>((ref) => "All");
+
+final navigationProvider = StateNotifierProvider<NavigationNotifier, int>(
+  (ref) => NavigationNotifier(),
+);
+
+class NavigationNotifier extends StateNotifier<int> {
+  NavigationNotifier() : super(0);
+
+  void setIndex(int index) {
+    state = index;
+  }
+}

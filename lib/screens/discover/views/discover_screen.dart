@@ -1,10 +1,15 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shop/Data/JsonData.dart';
 import 'package:shop/Data/Provider.dart';
 import 'package:shop/components/network_image_with_loader.dart';
 import 'package:shop/components/product/product_card.dart';
 import 'package:shop/constants.dart';
+import 'package:shop/constants/app_sizes.dart';
 import 'package:shop/models/category_model.dart' as categoryModel;
 import 'package:shop/models/product_model.dart';
 import 'package:shop/screens/discover/views/components/discover_categoryBtn.dart';
@@ -26,53 +31,66 @@ class DiscoverScreen extends ConsumerStatefulWidget {
 class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
   late String selectedCategory;
   String searchQuery = "";
+  late List<ProductModel0> allProducts;
 
   @override
   void initState() {
     super.initState();
+    final parsed = jsonDecode(jsonData) as List<dynamic>;
+    allProducts = parsed.map((e) => ProductModel0.fromJson(e)).toList();
     selectedCategory = widget.selectedCategory ?? "All";
   }
 
-  List<ProductModel> getProducts() {
-    List<ProductModel> products = selectedCategory == "All"
-        ? [
-            ...tilesProducts,
-            ...floorTilesProducts,
-            ...bathroomTilesProducts,
-            ...importedTilesProducts,
-            ...sanitaryWareProducts
-          ]
-        : selectedCategory == "Floor Tiles"
-            ? floorTilesProducts
-            : selectedCategory == "Bathroom Tiles"
-                ? bathroomTilesProducts
-                : selectedCategory == "Imported Tiles"
-                    ? importedTilesProducts
-                    : selectedCategory == "Sanitary Ware"
-                        ? sanitaryWareProducts
-                        : tilesProducts;
+  List<ProductModel0> getProducts() {
+  List<ProductModel0> products;
 
-    return products
-        .where((product) =>
-            product.title.toLowerCase().contains(searchQuery.toLowerCase()))
-        .toList();
+  switch (selectedCategory) {
+    case "Drinks":
+      products = allProducts.where((p) => p.code.startsWith("D")).toList();
+      break;
+    case "Coffee & Beverages":
+      products = allProducts.where((p) => p.code.startsWith("C")).toList();
+      break;
+    case "Noodles":
+      products = allProducts.where((p) => p.code.startsWith("N")).toList();
+      break;
+    case "Canned Food":
+      products = allProducts.where((p) => p.code.startsWith("F")).toList();
+      break;
+    case "Grocery":
+      products = allProducts.where((p) => p.code.startsWith("G")).toList();
+      break;
+    default:
+      products = allProducts;
   }
+
+  products = products
+      .where((p) => p.title.toLowerCase().contains(searchQuery.toLowerCase()))
+      .toList();
+
+  products.shuffle(Random());
+
+  return products;
+}
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: RefreshIndicator(
-         onRefresh: () async {
-    await Future.delayed(const Duration(seconds: 3)); 
-    setState(() {});
-  },
+        onRefresh: () async {
+          await Future.delayed(const Duration(seconds: 3));
+          setState(() {});
+        },
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(defaultPadding),
+                padding: const EdgeInsets.only(
+                    left: 10, right: 10, bottom: defaultPadding),
                 child: TextFormField(
+                  cursorColor: Colors.black87,
                   onChanged: (value) {
                     setState(() {
                       searchQuery = value;
@@ -80,15 +98,36 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                   },
                   textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
-                    hintText: "Find something...",
-                    border: secodaryOutlineInputBorder(context),
+                    hintText: "Search...",
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey.withValues(alpha: 0.15),
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey.withValues(alpha: 0.15),
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                    ),
                     prefixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: SvgPicture.asset(
-                        "assets/icons/Search.svg",
-                        height: 24,
-                        color:
-                            Theme.of(context).iconTheme.color!.withOpacity(0.3),
+                      padding: const EdgeInsets.symmetric(horizontal: 6),
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.grey.withValues(alpha: 0.07)),
+                        child: SvgPicture.asset(
+                          "assets/icons/Search.svg",
+                          height: 22,
+                          color: Theme.of(context)
+                              .iconTheme
+                              .color!
+                              .withOpacity(0.3),
+                        ),
                       ),
                     ),
                   ),
@@ -136,49 +175,41 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(defaultPadding),
-                  child: GridView.builder(
-                    itemCount: getProducts().length,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: defaultPadding,
-                      mainAxisSpacing: defaultPadding,
-                      childAspectRatio: 0.67,
-                    ),
-                    itemBuilder: (context, index) {
-                      final product = getProducts()[index];
-                      return ProductCard(
-                        product: product,
-                        press: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => ProductDetailsScreen(
-                                description:
-                                    product.description ?? 'No Description...',
-                                images: [product.image.toString()],
-                                title: product.brandName,
-                                subtitle: product.title,
-                                discPrice: product.price,
-                                price: product.priceAfetDiscount ?? product.price,
-                                product: product,
-                                tilesProducts: getProducts(),
-                              ),
-                            ),
-                          );
-                        },
-                        image: product.image,
-                        brandName: product.brandName,
-                        title: product.title,
-                        price: product.price,
-                        priceAfterDiscount: product.priceAfetDiscount,
-                      );
-                    },
+            Expanded(
+  child: Padding(
+    padding: const EdgeInsets.all(defaultPadding),
+    child: SingleChildScrollView(
+      child: Wrap(
+        spacing: 13,
+        runSpacing: 10,
+        children: getProducts().map((product) {
+          return SizedBox(
+            width: (MediaQuery.of(context).size.width -
+                    (3 * defaultPadding)) /
+                2, // Two items per row
+            child: ProductCard(
+              product: product,
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>                               ProductDetailsScreen(product: product, image: product.image, title:product.title,),
+
                   ),
-                ),
-              ),
+                );
+              },
+              image: product.image,
+              brandName: product.brandName ?? product.code,
+              title: product.title,
+              price: product.price,
+            ),
+          );
+        }).toList(),
+      ),
+    ),
+  ),
+)
+
             ],
           ),
         ),

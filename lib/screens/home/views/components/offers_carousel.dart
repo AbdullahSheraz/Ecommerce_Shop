@@ -40,13 +40,7 @@ class _OffersCarouselState extends State<OffersCarousel> {
       discountParcent: 50,
       press: () {},
     ),
-    BannerMStyle4(
-      // image: , user your image
-      title: "SUMMER \nSALE",
-      subtitle: "SPECIAL OFFER",
-      discountParcent: 80,
-      press: () {},
-    ),
+  
   ];
 
   @override

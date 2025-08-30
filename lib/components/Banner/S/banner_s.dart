@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/constants.dart';
 
 import '../../network_image_with_loader.dart';
 
@@ -15,16 +16,26 @@ class BannerS extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 2.56,
-      child: GestureDetector(
-        onTap: press,
-        child: Stack(
-          children: [
-            NetworkImageWithLoader(image, radius: 0),
-            Container(color: Colors.black45),
-            ...children,
-          ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: defaultPadding),
+      child: AspectRatio(
+        aspectRatio: 2.56,
+        child: GestureDetector(
+          onTap: press,
+          child: Stack(
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(16)),
+                  child: Image.asset(image,
+                      fit: BoxFit.contain, width: double.infinity),
+                ),
+              ),
+              Container(color: Colors.grey.withValues(alpha: 0.07)),
+              ...children,
+            ],
+          ),
         ),
       ),
     );

@@ -19,12 +19,8 @@ class BannerM extends StatelessWidget {
       aspectRatio: 1.87,
       child: GestureDetector(
         onTap: press,
-        child: Stack(
-          children: [
-            NetworkImageWithLoader(image, radius: 0),
-            Container(color: Colors.black45),
-            ...children,
-          ],
+        child: Image.asset(
+          image,
         ),
       ),
     );

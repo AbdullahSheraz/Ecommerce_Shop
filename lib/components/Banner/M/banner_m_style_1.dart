@@ -6,7 +6,7 @@ import '../../../constants.dart';
 class BannerMStyle1 extends StatelessWidget {
   const BannerMStyle1({
     super.key,
-    this.image = "https://img.freepik.com/premium-photo/geometric-wooden-marble-pattern-floor-tile-design_637851-761.jpg?uid=R154965348&ga=GA1.1.2076787137.1740126067&semt=ais_hybrid",
+    this.image = "assets/images/banner3.jpg",
     required this.text,
     required this.press,
   });

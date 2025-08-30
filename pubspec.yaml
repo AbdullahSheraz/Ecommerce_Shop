@@ -27,30 +27,42 @@ dependencies:
   go_router: ^14.8.1
   firebase_core: ^3.13.0
   firebase_crashlytics: ^4.3.5
+  flutter_launcher_icons: ^0.14.4
+  mailer: ^6.5.0
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
+
   flutter_test:
     sdk: flutter
+
   flutter_lints: ^4.0.0
   build_runner: ^2.4.13
-  flutter_launcher_icons: ^0.14.4
+#  flutter_launcher_icons: ^0.14.4
 
-flutter_launcher_icons:
+flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/icon.png"
+  web: false
+  windows: false
+  macos: false
+  image_path: "assets/icon/icon.png"
+
 
 flutter:
   uses-material-design: true
 
   assets:
     - assets/images/
+    - assets/images/shop.png
     - assets/icons/
+    - assets/icon/icon.png
     - assets/Illustration/
     - assets/flags/
     - assets/logo/
     - assets/screens/
-
+    - assets/storeitems/
+    - assets/data/SuperStore.json
   fonts:
     - family: Plus Jakarta
       fonts:

@@ -1,10 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:shop/entry_point.dart';
 
-
-
 // import 'screen_export.dart';
-
 
 // Route<dynamic> generateRoute(RouteSettings settings) {
 //   switch (settings.name) {
@@ -20,7 +17,7 @@
 //       return MaterialPageRoute(
 //         builder: (context) => const SignUpScreen(),
 //       );
-  
+
 //     case passwordRecoveryScreenRoute:
 //       return MaterialPageRoute(
 //         builder: (context) => const PasswordRecoveryScreen(),
@@ -33,7 +30,7 @@
 //       return MaterialPageRoute(
 //         builder: (context) => EntryPoint(initialIndex: 3,),
 //       );
-      
+
 //     case dummyroute:
 //       return MaterialPageRoute(
 //         builder: (context) => EntryPoint(initialIndex: 1, text: "Tiles"),
@@ -142,200 +139,227 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop/entry_point.dart';
+import 'package:shop/screens/dummy.dart';
 
 import 'screen_export.dart';
+
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+// your imports
+// import 'entry_point.dart';
+// import 'screen_export.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/dum',
   routes: [
     GoRoute(
-      path: '/onboarding',
-      name: 'onboarding',
-      pageBuilder: (context, state) => _buildPage(const OnBordingScreen()),
+      path: RoutesPath.onbordingScreenPath,
+      name: RoutesName.onbordingScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const OnBordingScreen()),
     ),
     GoRoute(
-      path: '/login',
-      name: 'login',
-      pageBuilder: (context, state) => _buildPage(const LoginScreen()),
+      path: RoutesPath.logInScreenPath,
+      name: RoutesName.logInScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const LoginScreen()),
     ),
     GoRoute(
-      path: '/signup',
-      name: 'signup',
-      pageBuilder: (context, state) => _buildPage(const SignUpScreen()),
+      path: RoutesPath.signUpScreenPath,
+      name: RoutesName.signUpScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const SignUpScreen()),
     ),
     GoRoute(
-      path: '/password-recovery',
-      name: 'passwordRecovery',
-      pageBuilder: (context, state) => _buildPage(const PasswordRecoveryScreen()),
+      path: RoutesPath.passwordRecoveryScreenPath,
+      name: RoutesName.passwordRecoveryScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const PasswordRecoveryScreen()),
     ),
+
+    // Search
     GoRoute(
-      path: '/search',
-      name: 'search',
-      pageBuilder: (context, state) => _buildPage(EntryPoint(initialIndex: 1)),
+      path: RoutesPath.searchPath,
+      name: RoutesName.searchroute,
+      pageBuilder: (context, state) =>
+          _buildPage(EntryPoint(initialIndex: 1)),
     ),
+
     GoRoute(
-      path: '/cart',
-      name: 'cart',
-      pageBuilder: (context, state) => _buildPage(EntryPoint(initialIndex: 3)),
+      path: RoutesPath.cartPath, 
+      name: RoutesName.cartroute,
+      pageBuilder: (context, state) {
+        final text = state.extra as String?;
+        return _buildPage(
+          EntryPoint(initialIndex: 3, text: text),
+        );
+      },
     ),
+
+    // Dummy routes
     GoRoute(
       path: '/dum',
       name: 'dum',
-      pageBuilder: (context, state) {
-        return _buildPage(EntryPoint(initialIndex: 0));
-      },
+      pageBuilder: (context, state) =>
+          _buildPage(EntryPoint(initialIndex: 0)),
     ),
     GoRoute(
       path: '/dummy',
       name: 'dummy',
-      pageBuilder: (context, state) {
-        return _buildPage(EntryPoint(initialIndex: 1, text: 'All'));
-      },
+      pageBuilder: (context, state) =>
+          _buildPage(EntryPoint(initialIndex: 1, text: 'All')),
     ),
     GoRoute(
       path: '/dummy0',
       name: 'dummy0',
-      pageBuilder: (context, state) {
-        return _buildPage(EntryPoint(initialIndex: 1, text: 'Tiles'));
-      },
+      pageBuilder: (context, state) =>
+          _buildPage(EntryPoint(initialIndex: 1, text: 'Tiles')),
     ),
     GoRoute(
       path: '/dummy1',
       name: 'dummy1',
-      pageBuilder: (context, state) {
-        return _buildPage(EntryPoint(initialIndex: 1, text: "Floor Tiles"));
-      },
+      pageBuilder: (context, state) =>
+          _buildPage(EntryPoint(initialIndex: 1, text: "Floor Tiles")),
     ),
     GoRoute(
       path: '/dummy2',
       name: 'dummy2',
-      pageBuilder: (context, state) {
-        return _buildPage(EntryPoint(initialIndex: 1, text: "Bathroom Tiles"));
-      },
+      pageBuilder: (context, state) =>
+          _buildPage(EntryPoint(initialIndex: 1, text: "Bathroom Tiles")),
     ),
     GoRoute(
       path: '/dummy3',
       name: 'dummy3',
-      pageBuilder: (context, state) {
-        return _buildPage(EntryPoint(initialIndex: 1, text: "Imported Tiles"));
-      },
+      pageBuilder: (context, state) =>
+          _buildPage(EntryPoint(initialIndex: 1, text: "Imported Tiles")),
     ),
     GoRoute(
       path: '/dummy4',
       name: 'dummy4',
-      pageBuilder: (context, state) {
-        return _buildPage(EntryPoint(initialIndex: 1, text: "Sanitary Ware"));
-      },
+      pageBuilder: (context, state) =>
+          _buildPage(EntryPoint(initialIndex: 1, text: "Sanitary Ware")),
+    ),
+
+    GoRoute(
+      path: RoutesPath.productReviewsScreenPath,
+      name: RoutesName.productReviewsScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const ProductReviewsScreen()),
     ),
     GoRoute(
-      path: '/product-reviews',
-      name: 'productReviews',
-      pageBuilder: (context, state) => _buildPage(const ProductReviewsScreen()),
+      path: RoutesPath.homeScreenPath,
+      name: RoutesName.homeScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const HomeScreen()),
     ),
     GoRoute(
-      path: '/home',
-      name: 'home',
-      pageBuilder: (context, state) => _buildPage(const HomeScreen()),
+      path: RoutesPath.discoverScreenPath,
+      name: RoutesName.discoverScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const DiscoverScreen()),
     ),
     GoRoute(
-      path: '/discover',
-      name: 'discover',
-      pageBuilder: (context, state) => _buildPage(const DiscoverScreen()),
+      path: RoutesPath.onSaleScreenPath,
+      name: RoutesName.onSaleScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const OnSaleScreen()),
     ),
     GoRoute(
-      path: '/on-sale',
-      name: 'onSale',
-      pageBuilder: (context, state) => _buildPage(const OnSaleScreen()),
+      path: RoutesPath.kidsScreenPath,
+      name: RoutesName.kidsScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const KidsScreen()),
     ),
     GoRoute(
-      path: '/kids',
-      name: 'kids',
-      pageBuilder: (context, state) => _buildPage(const KidsScreen()),
+      path: RoutesPath.searchScreenPath,
+      name: RoutesName.searchScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const SearchScreen()),
     ),
     GoRoute(
-      path: '/search-screen',
-      name: 'searchScreen',
-      pageBuilder: (context, state) => _buildPage(const SearchScreen()),
+      path: RoutesPath.bookmarkScreenPath,
+      name: RoutesName.bookmarkScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const BookmarkScreen()),
     ),
     GoRoute(
-      path: '/bookmark',
-      name: 'bookmark',
-      pageBuilder: (context, state) => _buildPage(const BookmarkScreen()),
+      path: RoutesPath.profileScreenPath,
+      name: RoutesName.profileScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const ProfileScreen()),
     ),
     GoRoute(
-      path: '/profile',
-      name: 'profile',
-      pageBuilder: (context, state) => _buildPage(const ProfileScreen()),
+      path: RoutesPath.userInfoScreenPath,
+      name: RoutesName.userInfoScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const UserInfoScreen()),
     ),
     GoRoute(
-      path: '/user-info',
-      name: 'userInfo',
-      pageBuilder: (context, state) => _buildPage(const UserInfoScreen()),
+      path: RoutesPath.notificationsScreenPath,
+      name: RoutesName.notificationsScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const NotificationsScreen()),
     ),
     GoRoute(
-      path: '/notifications',
-      name: 'notifications',
-      pageBuilder: (context, state) => _buildPage(const NotificationsScreen()),
+      path: RoutesPath.noNotificationScreenPath,
+      name: RoutesName.noNotificationScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const NoNotificationScreen()),
     ),
     GoRoute(
-      path: '/no-notifications',
-      name: 'noNotifications',
-      pageBuilder: (context, state) => _buildPage(const NoNotificationScreen()),
+      path: RoutesPath.enableNotificationScreenPath,
+      name: RoutesName.enableNotificationScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const EnableNotificationScreen()),
     ),
     GoRoute(
-      path: '/enable-notifications',
-      name: 'enableNotifications',
-      pageBuilder: (context, state) => _buildPage(const EnableNotificationScreen()),
+      path: RoutesPath.notificationOptionsScreenPath,
+      name: RoutesName.notificationOptionsScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const NotificationOptionsScreen()),
     ),
     GoRoute(
-      path: '/notification-options',
-      name: 'notificationOptions',
-      pageBuilder: (context, state) => _buildPage(const NotificationOptionsScreen()),
+      path: RoutesPath.addressesScreenPath,
+      name: RoutesName.addressesScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const AddressesScreen()),
     ),
     GoRoute(
-      path: '/addresses',
-      name: 'addresses',
-      pageBuilder: (context, state) => _buildPage(const AddressesScreen()),
+      path: RoutesPath.ordersScreenPath,
+      name: RoutesName.ordersScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const OrdersScreen()),
     ),
     GoRoute(
-      path: '/orders',
-      name: 'orders',
-      pageBuilder: (context, state) => _buildPage(const OrdersScreen()),
+      path: RoutesPath.preferencesScreenPath,
+      name: RoutesName.preferencesScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const PreferencesScreen()),
     ),
     GoRoute(
-      path: '/preferences',
-      name: 'preferences',
-      pageBuilder: (context, state) => _buildPage(const PreferencesScreen()),
+      path: RoutesPath.emptyWalletScreenPath,
+      name: RoutesName.emptyWalletScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const EmptyWalletScreen()),
     ),
     GoRoute(
-      path: '/empty-wallet',
-      name: 'emptyWallet',
-      pageBuilder: (context, state) => _buildPage(const EmptyWalletScreen()),
+      path: RoutesPath.walletScreenPath,
+      name: RoutesName.walletScreenRoute,
+      pageBuilder: (context, state) =>
+          _buildPage(const WalletScreen()),
     ),
-    GoRoute(
-      path: '/wallet',
-      name: 'wallet',
-      pageBuilder: (context, state) => _buildPage(const WalletScreen()),
-    ),
-    GoRoute(
-      path: '/cart-screen',
-      name: 'cartScreen',
-      pageBuilder: (context, state) => _buildPage(EntryPoint(initialIndex: 3, text: "Floor Tiles")),
+     GoRoute(
+      path: RoutesPath.itemPath,
+      name: RoutesName.itemRoute,
+      pageBuilder: (context, state) =>
+          _buildPage( ItemListScreen()),
     ),
   ],
-  errorPageBuilder: (context, state) => _buildPage(const OnBordingScreen()),
+  errorPageBuilder: (context, state) =>
+      _buildPage(const OnBordingScreen()),
 );
 
-CustomTransitionPage _buildPage(Widget child) {
-  return CustomTransitionPage(
-    child: child,
-    transitionDuration: const Duration(milliseconds: 300),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      return SlideTransition(
-        position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)
-            .animate(animation),
-        child: child,
-      );
-    },
-  );
+Page _buildPage(Widget child) {
+  return MaterialPage(child: child);
 }

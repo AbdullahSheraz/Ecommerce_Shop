@@ -22,7 +22,7 @@ class _BookmarkScreenState extends ConsumerState<BookmarkScreen> {
        final bookmarks = ref.watch(bookmarkProvider);
 
     return Scaffold(
-     
+ 
       body: RefreshIndicator(
          onRefresh: () async {
     await Future.delayed(const Duration(seconds: 3)); 
@@ -47,8 +47,6 @@ class _BookmarkScreenState extends ConsumerState<BookmarkScreen> {
                       title: product.title,
                       brandName: product.brandName,
                       price: product.price,
-                      discountPercent: product.dicountpercent,
-                      priceAfterDiscount: product.priceAfetDiscount,
                       onTapButton: () {},
                       press: () {},
                     );

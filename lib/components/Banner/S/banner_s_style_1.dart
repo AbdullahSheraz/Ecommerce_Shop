@@ -8,7 +8,7 @@ import 'banner_s.dart';
 class BannerSStyle1 extends StatelessWidget {
   const BannerSStyle1({
     super.key,
-    this.image = "https://img.freepik.com/premium-photo/marble-tile-collection-showcasing-various-colors-patterns_263366-4069.jpg?uid=R154965348&ga=GA1.1.2076787137.1740126067&semt=ais_hybrid",
+    this.image = "assets/images/S1.jpg",
     required this.title,
     required this.press,
     this.subtitle,
@@ -29,7 +29,7 @@ class BannerSStyle1 extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(defaultPadding),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Expanded(
                 child: Column(
@@ -59,31 +59,18 @@ class BannerSStyle1 extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: defaultPadding),
-              SizedBox(
-                height: 48,
-                width: 48,
-                child: ElevatedButton(
-                  onPressed: press,
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    backgroundColor: Colors.white,
-                  ),
-                  child: SvgPicture.asset(
-                    "https://img.freepik.com/premium-photo/marble-tile-collection-showcasing-various-colors-patterns_263366-4069.jpg?uid=R154965348&ga=GA1.1.2076787137.1740126067&semt=ais_hybrid",
-                    colorFilter:
-                        const ColorFilter.mode(Colors.black, BlendMode.srcIn),
-                  ),
-                ),
-              ),
+              
             ],
           ),
         ),
-        Align(
-          alignment: Alignment.topCenter,
-          child: BannerDiscountTag(
-            percentage: discountParcent,
-            height: 56,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: defaultPadding, ),
+          child: Align(
+            alignment: Alignment.topRight,
+            child: BannerDiscountTag(
+              percentage: discountParcent,
+              height: 56,
+            ),
           ),
         ),
       ],

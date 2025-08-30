@@ -6,6 +6,7 @@ import 'package:shop/components/list_tile/divider_list_tile.dart';
 import 'package:shop/components/network_image_with_loader.dart';
 import 'package:shop/constants.dart';
 import 'package:shop/constants/app_sizes.dart';
+import 'package:shop/route/route_constants.dart';
 
 import 'components/profile_card.dart';
 import 'components/profile_menu_item_list_tile.dart';
@@ -29,28 +30,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: ListView(
           children: [
             ProfileCard(
-              name: "Sepide",
-              email: "theflutterway@gmail.com",
-              imageSrc: "https://i.imgur.com/IXnwbLk.png",
+              name: "Ahmad",
+              email: "itsTechWorld@gmail.com",
+              imageSrc: 'assets/images/its.jpg',
               // proLableText: "Sliver",
               // isPro: true, if the user is pro
               press: () {
-                context.goNamed('userInfo');
+                context.pushNamed(RoutesName.userInfoScreenRoute);
               },
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: defaultPadding, vertical: defaultPadding * 1.5),
-              child: GestureDetector(
-                onTap: () {},
-                child: const AspectRatio(
-                  aspectRatio: 1.8,
-                  child:
-                      NetworkImageWithLoader("https://i.imgur.com/dz0BBom.png"),
-                ),
-              ),
-            ),
-
+           
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
               child: Text(
@@ -58,11 +47,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
-           gapH8,           ProfileMenuListTile(
+            gapH8,
+            ProfileMenuListTile(
               text: "Orders",
               svgSrc: "assets/icons/Order.svg",
               press: () {
-                context.goNamed('orders');
+                context.pushNamed(RoutesName.ordersScreenRoute);
               },
             ),
             ProfileMenuListTile(
@@ -75,28 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               svgSrc: "assets/icons/Wishlist.svg",
               press: () {},
             ),
-            ProfileMenuListTile(
-              text: "Addresses",
-              svgSrc: "assets/icons/Address.svg",
-              press: () {
-                context.goNamed('addresses');
-              },
-            ),
-            ProfileMenuListTile(
-              text: "Payment",
-              svgSrc: "assets/icons/card.svg",
-              press: () {
-                context.goNamed('emptyPayment');
-              },
-            ),
-            ProfileMenuListTile(
-              text: "Wallet",
-              svgSrc: "assets/icons/Wallet.svg",
-              press: () {
-                context.goNamed('wallet');
-              },
-            ),
-          gapH16,
+            gapH16,
             Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: defaultPadding, vertical: defaultPadding / 2),
@@ -105,43 +74,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
-            DividerListTileWithTrilingText(
+            ProfileMenuListTile(
               svgSrc: "assets/icons/Notification.svg",
-              title: "Notification",
-              trilingText: "Off",
+              text: "Notification",
               press: () {
-                context.goNamed('enableNotification');
+                context.pushNamed(RoutesName.enableNotificationScreenRoute);
               },
             ),
             ProfileMenuListTile(
               text: "Preferences",
               svgSrc: "assets/icons/Preferences.svg",
               press: () {
-                context.goNamed('preferences');
+                context.pushNamed(RoutesName.preferencesScreenRoute);
               },
             ),
             gapH16,
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: defaultPadding, vertical: defaultPadding / 2),
-              child: Text(
-                "Settings",
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-            ),
-            ProfileMenuListTile(
-              text: "Language",
-              svgSrc: "assets/icons/Language.svg",
-              press: () {
-                context.goNamed('selectLanguage');
-              },
-            ),
-            ProfileMenuListTile(
-              text: "Location",
-              svgSrc: "assets/icons/Location.svg",
-              press: () {},
-            ),
-          gapH16,
             Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: defaultPadding, vertical: defaultPadding / 2),
@@ -151,30 +98,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             ProfileMenuListTile(
-              text: "Get Help",
-              svgSrc: "assets/icons/Help.svg",
-              press: () {
-                context.goNamed('getHelp');
-              },
-            ),
-            ProfileMenuListTile(
               text: "FAQ",
               svgSrc: "assets/icons/FAQ.svg",
               press: () {},
-              isShowDivider: false,
             ),
-            ProfileMenuListTile(
-              text: "Crashlytics Firebase",
-              svgSrc: "assets/icons/FAQ.svg",
-              press: () {
-                FirebaseCrashlytics.instance.crash();
-              },
-              isShowDivider: false,
-            ),
-gapH16,
-            
-
-            
             ListTile(
               onTap: () {},
               minLeadingWidth: 24,

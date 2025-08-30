@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:shop/components/Banner/S/banner_s_style_1.dart';
 import 'package:shop/components/Banner/S/banner_s_style_5.dart';
 import 'package:shop/constants.dart';
@@ -30,58 +33,97 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SafeArea(
           child: CustomScrollView(
             slivers: [
-              // Top offers carousel + categories
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 10, bottom: defaultPadding),
+                  child: TextFormField(
+                    cursorColor: Colors.black87,
+                    onChanged: (value) {
+                      // handle search input
+                    },
+                    textInputAction: TextInputAction.search,
+                    decoration: InputDecoration(
+                      hintText: "Search...",
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.grey.withAlpha(40),
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.grey.withAlpha(40),
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.grey.withAlpha(15),
+                          ),
+                          child: SvgPicture.asset(
+                            "assets/icons/Search.svg",
+                            height: 22,
+                            color: Theme.of(context)
+                                .iconTheme
+                                .color!
+                                .withAlpha(77),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
               const SliverToBoxAdapter(child: OffersCarouselAndCategories()),
 
-              // Popular Products
               const SliverToBoxAdapter(child: PopularProducts()),
 
-              // Flash Sale section with spacing
-              const SliverPadding(
-                padding: EdgeInsets.symmetric(vertical: defaultPadding * 1.5),
-                sliver: SliverToBoxAdapter(child: FlashSale()),
-              ),
+              // const SliverPadding(
+              //   padding: EdgeInsets.symmetric(vertical: defaultPadding * 1.5),
+              //   sliver: SliverToBoxAdapter(child: FlashSale()),
+              // ),
 
               // Banner Section 1
               SliverToBoxAdapter(
                 child: Column(
                   children: [
-                    BannerSStyle1(
-                      title: "New \nArrival",
-                      subtitle: "SPECIAL OFFER",
-                      discountParcent: 50,
-                      press: () {
-                        Navigator.pushNamed(context, onSaleScreenRoute);
-                      },
-                    ),
                     const SizedBox(height: defaultPadding),
+                    ClipRRect(
+                      child: Image.asset('assets/images/S1.jpg',
+                          fit: BoxFit.contain, width: double.infinity),
+                    ),
                   ],
                 ),
               ),
 
-              // Most Popular section
               const SliverToBoxAdapter(child: MostPopular()),
 
-              // Banner Section 2
-              SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                 gapH24,
-                    BannerSStyle5(
-                      title: "Black \nFriday",
-                      subtitle: "50% Off",
-                      bottomText: "COLLECTION",
-                      press: () {
-                        Navigator.pushNamed(context, onSaleScreenRoute);
-                      },
-                    ),
-                     gapH16,
-                  ],
-                ),
-              ),
-              const SliverToBoxAdapter(child: BestSellers()),
+              // SliverToBoxAdapter(
+              //   child: Column(
+              //     children: [
+              //       gapH24,
+              //       BannerSStyle5(
+              //         title: "Black \nFriday",
+              //         subtitle: "50% Off",
+              //         bottomText: "COLLECTION",
+              //         press: () {
+              //           context.goNamed(RoutesName.onSaleScreenRoute);
+              //         },
+              //       ),
+              //       gapH16,
+              //     ],
+              //   ),
+              // ),
+              // const SliverToBoxAdapter(child: BestSellers()),
               const SliverToBoxAdapter(child: gapH64),
-              
             ],
           ),
         ),

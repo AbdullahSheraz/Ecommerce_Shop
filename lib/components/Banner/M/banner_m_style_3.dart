@@ -9,8 +9,8 @@ import '../../../constants.dart';
 class BannerMStyle3 extends StatelessWidget {
   const BannerMStyle3({
     super.key,
-    this.image = "https://img.freepik.com/premium-photo/seamless-pattern-with-marble-wooden-textures-ceramics-tiles-design_637851-436.jpg?uid=R154965348&ga=GA1.1.2076787137.1740126067&semt=ais_hybrid",
-    required this.title,
+    this.image =
+"assets/images/G2.jpg",    required this.title,
     required this.press,
     required this.discountParcent,
   });

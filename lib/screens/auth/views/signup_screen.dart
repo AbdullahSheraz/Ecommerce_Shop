@@ -38,7 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     "Let’s get started!",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
-                 gapH8,
+                  gapH8,
                   const Text(
                     "Please enter your valid data in order to create an account.",
                   ),
@@ -59,8 +59,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               TextSpan(
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.pushNamed(
-                                        context, termsOfServicesScreenRoute);
+                                                          context.goNamed(RoutesName.termsOfServicesScreenRoute);
+
+                                 
                                   },
                                 text: " Terms of service ",
                                 style: const TextStyle(
@@ -77,13 +78,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       )
                     ],
                   ),
-                 gapH32,
+                  gapH32,
                   ElevatedButton(
                     onPressed: () {
                       // There is 2 more screens while user complete their profile
                       // afre sign up, it's available on the pro version get it now
                       // 🔗 https://theflutterway.gumroad.com/l/fluttershop
-                    context.goNamed('entryPoint');
+                      context.goNamed(RoutesName.entryPointScreenRoute);
                     },
                     child: const Text("Continue"),
                   ),
@@ -93,7 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       const Text("Do you have an account?"),
                       TextButton(
                         onPressed: () {
-                        context.goNamed('logIn');
+                                                                                    context.goNamed(RoutesName.logInScreenRoute);
 
                         },
                         child: const Text("Log in"),

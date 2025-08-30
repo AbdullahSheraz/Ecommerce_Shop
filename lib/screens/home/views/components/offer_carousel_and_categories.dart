@@ -18,12 +18,16 @@ class OffersCarouselAndCategories extends StatelessWidget {
         // While loading use 👇
         // const OffersSkelton(),
         const OffersCarousel(),
-  gapH8,
+
         Padding(
-          padding: const EdgeInsets.all(defaultPadding),
+          padding: const EdgeInsets.symmetric(
+              vertical: defaultPadding, horizontal: 16),
           child: Text(
             "Categories",
-            style: Theme.of(context).textTheme.titleSmall,
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
           ),
         ),
         // While loading use 👇

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shop/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,6 +20,11 @@ class PreferencesScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              ref.read(navigationProvider.notifier).setIndex(4);
+            },
+            icon: Icon(LucideIcons.chevronLeft)),
         title: const Text("Cookie preferences"),
         actions: [
           TextButton(
@@ -32,33 +38,33 @@ class PreferencesScreen extends ConsumerWidget {
         child: Column(
           children: [
             ListTile(
-  onTap: () {
-    ref.read(themeProvider.notifier).state =
-        ref.read(themeProvider) == ThemeMode.dark
-            ? ThemeMode.light
-            : ThemeMode.dark;
-  },
-  title: Text(
-    "Theme Mode Dark",
-    style: Theme.of(context).textTheme.titleSmall,
-  ),
-  subtitle: Padding(
-    padding: const EdgeInsets.only(top: defaultPadding / 2),
-    child: Text(
-      "Tap on button to apply Dark mode",
-      style: Theme.of(context).textTheme.bodySmall!.copyWith(
-          color: Theme.of(context).textTheme.bodyMedium!.color),
-    ),
-  ),
-  trailing: CupertinoSwitch(
-    onChanged: (value) {
-      ref.read(themeProvider.notifier).state =
-          value ? ThemeMode.dark : ThemeMode.light; 
-    },
-    activeColor: primaryColor,
-    value: ref.watch(themeProvider) == ThemeMode.dark, 
-  ),
-),
+              onTap: () {
+                ref.read(themeProvider.notifier).state =
+                    ref.read(themeProvider) == ThemeMode.dark
+                        ? ThemeMode.light
+                        : ThemeMode.dark;
+              },
+              title: Text(
+                "Theme Mode Dark",
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(top: defaultPadding / 2),
+                child: Text(
+                  "Tap on button to apply Dark mode",
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Theme.of(context).textTheme.bodyMedium!.color),
+                ),
+              ),
+              trailing: CupertinoSwitch(
+                onChanged: (value) {
+                  ref.read(themeProvider.notifier).state =
+                      value ? ThemeMode.dark : ThemeMode.light;
+                },
+                activeColor: primaryColor,
+                value: ref.watch(themeProvider) == ThemeMode.dark,
+              ),
+            ),
             PreferencesListTile(
               titleText: "Analytics",
               subtitleTxt:

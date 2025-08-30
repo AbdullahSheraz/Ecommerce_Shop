@@ -41,26 +41,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text(
                     "Log in with your data that you intered during your registration.",
                   ),
-                     gapH16,
+                  gapH16,
                   LogInForm(formKey: _formKey),
                   Align(
                     child: TextButton(
                       child: const Text("Forgot password"),
                       onPressed: () {
-                        Navigator.pushNamed(
-                            context, passwordRecoveryScreenRoute);
+                        context.goNamed(RoutesName.passwordRecoveryScreenRoute);
                       },
                     ),
                   ),
                   SizedBox(
-                    height: size.height > 700
-                        ? size.height * 0.1
-                        : defaultPadding,
+                    height:
+                        size.height > 700 ? size.height * 0.1 : defaultPadding,
                   ),
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                      context.goNamed('entryPoint');
+                                                context.goNamed(RoutesName.entryPointScreenRoute);
 
                       }
                     },
@@ -72,7 +70,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       const Text("Don't have an account?"),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, signUpScreenRoute);
+                                                                          context.goNamed(RoutesName.signUpScreenRoute);
+
                         },
                         child: const Text("Sign up"),
                       )
