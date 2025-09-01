@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop/constants/app_sizes.dart';
-
-import '../../../../constants.dart';
+import 'package:shop/constants/constants.dart';
 
 class LogInForm extends StatelessWidget {
   const LogInForm({
@@ -14,19 +13,32 @@ class LogInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color baseGrey =
+        Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.15);
+
     return Form(
       key: formKey,
       child: Column(
         children: [
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Email',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+          ),
+          gapH4,
           TextFormField(
-            onSaved: (emal) {
-              // Email
+            onSaved: (email) {
+              // Save email
             },
             validator: emaildValidator.call,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
+            cursorColor: Colors.black45,
             decoration: InputDecoration(
-              hintText: "Email address",
+              hintText: "abc@gmail.com",
+              hintStyle: TextStyle(color: Colors.grey.withValues(alpha: 0.3)),
               prefixIcon: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
@@ -34,26 +46,48 @@ class LogInForm extends StatelessWidget {
                   "assets/icons/Message.svg",
                   height: 24,
                   width: 24,
-                  colorFilter: ColorFilter.mode(
-                      Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .color!
-                          .withValues(alpha: 0.3),
-                      BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(baseGrey, BlendMode.srcIn),
                 ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: baseGrey, width: 1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide:const  BorderSide(color: Colors.red, width: 1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide:const  BorderSide(color: Colors.red, width: 1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide:const  BorderSide(
+                  color: Colors.black26,
+                ),
+                borderRadius: BorderRadius.circular(12),
               ),
             ),
           ),
-        gapH16,
+          gapH16,
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Password',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+          ),
+          gapH4,
           TextFormField(
             onSaved: (pass) {
-              // Password
+              // Save password
             },
             validator: passwordValidator.call,
             obscureText: true,
+            cursorColor: Colors.black45,
             decoration: InputDecoration(
-              hintText: "Password",
+              hintText: "**********",
+              hintStyle: TextStyle(color: Colors.grey.withValues(alpha: 0.3)),
               prefixIcon: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
@@ -61,14 +95,26 @@ class LogInForm extends StatelessWidget {
                   "assets/icons/Lock.svg",
                   height: 24,
                   width: 24,
-                  colorFilter: ColorFilter.mode(
-                      Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .color!
-                          .withValues(alpha: 0.3),
-                      BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(baseGrey, BlendMode.srcIn),
                 ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: baseGrey),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide:const  BorderSide(color: Colors.red, width: 1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide:const  BorderSide(color: Colors.red, width: 1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide:const  BorderSide(
+                  color: Colors.black26,
+                ),
+                borderRadius: BorderRadius.circular(12),
               ),
             ),
           ),
