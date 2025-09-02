@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop/constants/app_sizes.dart';
 import 'package:shop/constants/constants.dart';
 
-class LogInForm extends StatelessWidget {
-  const LogInForm({
+class ResetForm extends StatelessWidget {
+  const ResetForm({
     super.key,
     required this.formKey,
   });
@@ -29,13 +29,13 @@ class LogInForm extends StatelessWidget {
           ),
           gapH4,
           TextFormField(
-            onSaved: (email) {
-              // Save email
+            onSaved: (reset) {
+              
             },
             validator: emaildValidator.call,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
-            cursorColor:primaryColor,
+            cursorColor: primaryColor,
             decoration: InputDecoration(
               hintText: "abc@gmail.com",
               hintStyle: TextStyle(color: Colors.grey.withValues(alpha: 0.3)),
@@ -69,54 +69,7 @@ class LogInForm extends StatelessWidget {
               ),
             ),
           ),
-          gapH16,
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Password',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-            ),
-          ),
-          gapH4,
-          TextFormField(
-            onSaved: (pass) {
-            },
-            validator: passwordValidator.call,
-            obscureText: true,
-            cursorColor: primaryColor,
-            decoration: InputDecoration(
-              hintText: "**********",
-              hintStyle: TextStyle(color: Colors.grey.withValues(alpha: 0.3)),
-              prefixIcon: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
-                child: SvgPicture.asset(
-                  "assets/icons/Lock.svg",
-                  height: 24,
-                  width: 24,
-                  colorFilter: ColorFilter.mode(baseGrey, BlendMode.srcIn),
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: baseGrey),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderSide:const  BorderSide(color: Colors.red, width: 1),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderSide:const  BorderSide(color: Colors.red, width: 1),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide:const  BorderSide(
-                  color: Colors.black26,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
+         
         ],
       ),
     );

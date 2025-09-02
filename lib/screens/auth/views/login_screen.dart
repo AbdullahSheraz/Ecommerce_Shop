@@ -60,8 +60,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: Colors.black87),
                         ),
                         onTap: () {
+                            // context.pushNamed('dum');
                           context
-                              .goNamed(RoutesName.passwordRecoveryScreenRoute);
+                              .pushNamed(RoutesName.passwordRecoveryScreenRoute);
                         },
                       ),
                     ),
