@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shop/route/router.dart' as router;
-import 'package:shop/theme/app_theme.dart';
+import 'package:shop/core/route/router.dart' as router;
+import 'package:shop/core/theme/app_theme.dart';
 
 final themeProvider = StateProvider<ThemeMode>((ref) {
   return ThemeMode.light;
