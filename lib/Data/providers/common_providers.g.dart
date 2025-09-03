@@ -6,11 +6,11 @@ part of 'common_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$countriesHash() => r'64ea8f218bc2812a4ea184e8eb4d928e5a3d3899';
+String _$countriesHash() => r'ba83d1db4d2458adbc1917ae1df1a1b1b686ab7a';
 
 /// See also [countries].
 @ProviderFor(countries)
-final countriesProvider = AutoDisposeStreamProvider<List<dynamic>>.internal(
+final countriesProvider = AutoDisposeFutureProvider<List<dynamic>>.internal(
   countries,
   name: r'countriesProvider',
   debugGetCreateSourceHash:
@@ -21,8 +21,8 @@ final countriesProvider = AutoDisposeStreamProvider<List<dynamic>>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef CountriesRef = AutoDisposeStreamProviderRef<List<dynamic>>;
-String _$statesHash() => r'19de3ca4f745913c2696f5d22e35fae6ef4477f6';
+typedef CountriesRef = AutoDisposeFutureProviderRef<List<dynamic>>;
+String _$statesHash() => r'419f7c4868edfeed422b66259ef455b4167efad2';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -88,7 +88,7 @@ class StatesFamily extends Family<AsyncValue<List<dynamic>>> {
 }
 
 /// See also [states].
-class StatesProvider extends AutoDisposeStreamProvider<List<dynamic>> {
+class StatesProvider extends AutoDisposeFutureProvider<List<dynamic>> {
   /// See also [states].
   StatesProvider(
     String countryId,
@@ -122,7 +122,7 @@ class StatesProvider extends AutoDisposeStreamProvider<List<dynamic>> {
 
   @override
   Override overrideWith(
-    Stream<List<dynamic>> Function(StatesRef provider) create,
+    FutureOr<List<dynamic>> Function(StatesRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -139,7 +139,7 @@ class StatesProvider extends AutoDisposeStreamProvider<List<dynamic>> {
   }
 
   @override
-  AutoDisposeStreamProviderElement<List<dynamic>> createElement() {
+  AutoDisposeFutureProviderElement<List<dynamic>> createElement() {
     return _StatesProviderElement(this);
   }
 
@@ -159,20 +159,20 @@ class StatesProvider extends AutoDisposeStreamProvider<List<dynamic>> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin StatesRef on AutoDisposeStreamProviderRef<List<dynamic>> {
+mixin StatesRef on AutoDisposeFutureProviderRef<List<dynamic>> {
   /// The parameter `countryId` of this provider.
   String get countryId;
 }
 
 class _StatesProviderElement
-    extends AutoDisposeStreamProviderElement<List<dynamic>> with StatesRef {
+    extends AutoDisposeFutureProviderElement<List<dynamic>> with StatesRef {
   _StatesProviderElement(super.provider);
 
   @override
   String get countryId => (origin as StatesProvider).countryId;
 }
 
-String _$citiesHash() => r'2c39f32abc4e320ef4434b7b587ef8cd542fcb60';
+String _$citiesHash() => r'b28639c22e6489cab969ee653ebfb63636780c81';
 
 /// See also [cities].
 @ProviderFor(cities)
@@ -220,7 +220,7 @@ class CitiesFamily extends Family<AsyncValue<List<dynamic>>> {
 }
 
 /// See also [cities].
-class CitiesProvider extends AutoDisposeStreamProvider<List<dynamic>> {
+class CitiesProvider extends AutoDisposeFutureProvider<List<dynamic>> {
   /// See also [cities].
   CitiesProvider(
     String countryId,
@@ -259,7 +259,7 @@ class CitiesProvider extends AutoDisposeStreamProvider<List<dynamic>> {
 
   @override
   Override overrideWith(
-    Stream<List<dynamic>> Function(CitiesRef provider) create,
+    FutureOr<List<dynamic>> Function(CitiesRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -277,7 +277,7 @@ class CitiesProvider extends AutoDisposeStreamProvider<List<dynamic>> {
   }
 
   @override
-  AutoDisposeStreamProviderElement<List<dynamic>> createElement() {
+  AutoDisposeFutureProviderElement<List<dynamic>> createElement() {
     return _CitiesProviderElement(this);
   }
 
@@ -300,7 +300,7 @@ class CitiesProvider extends AutoDisposeStreamProvider<List<dynamic>> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin CitiesRef on AutoDisposeStreamProviderRef<List<dynamic>> {
+mixin CitiesRef on AutoDisposeFutureProviderRef<List<dynamic>> {
   /// The parameter `countryId` of this provider.
   String get countryId;
 
@@ -309,7 +309,7 @@ mixin CitiesRef on AutoDisposeStreamProviderRef<List<dynamic>> {
 }
 
 class _CitiesProviderElement
-    extends AutoDisposeStreamProviderElement<List<dynamic>> with CitiesRef {
+    extends AutoDisposeFutureProviderElement<List<dynamic>> with CitiesRef {
   _CitiesProviderElement(super.provider);
 
   @override

@@ -3,19 +3,19 @@ import 'package:shop/data/repository/common_repository.dart';
 part 'common_providers.g.dart';
 
 @riverpod
-Stream<List<dynamic>> countries(CountriesRef ref) {
+Future<List<dynamic>> countries(CountriesRef ref) async {
   final repo = ref.watch(commonRepositoryProvider);
   return repo.getCountries();
 }
 
 @riverpod
-Stream<List<dynamic>> states(StatesRef ref, String countryId) {
+Future<List<dynamic>> states(StatesRef ref, String countryId) async {
   final repo = ref.watch(commonRepositoryProvider);
   return repo.getStates(countryId);
 }
 
 @riverpod
-Stream<List<dynamic>> cities(CitiesRef ref, String countryId, String stateId) {
+Future<List<dynamic>> cities(CitiesRef ref, String countryId,String stateId) async {
   final repo = ref.watch(commonRepositoryProvider);
-  return repo.getCities(countryId, stateId);
+  return repo.getCities(countryId,stateId);
 }
