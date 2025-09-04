@@ -3,25 +3,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shop/providers/auth_providers.dart'; 
 import 'package:shop/core/constants/app_sizes.dart';
  
-class Categories extends ConsumerWidget {
-  const Categories({super.key});
+class BrandsCategory extends ConsumerWidget {
+  const BrandsCategory({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoriesAsync = ref.watch(categoriesProvider);
+    final brandAsync = ref.watch(brandsProvider);
 
-    return categoriesAsync.when(
+    return brandAsync.when(
       data: (categories) {
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: categories.map((category) {
-              final isActive = false; // or use your selectedCategory logic
+              final isActive = false;
               return Padding(
                 padding: const EdgeInsets.only(left: 18),
                 child: InkWell(
                   onTap: () {
-                    // handle tap
+                 
                   },
                   borderRadius: const BorderRadius.all(Radius.circular(35)),
                   child: Column(

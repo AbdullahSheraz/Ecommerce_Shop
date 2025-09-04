@@ -147,14 +147,12 @@
 //     );
 //   }
 // }
-import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:http/http.dart' as http;
-import 'package:shop/config/api_config.dart';
 import 'package:shop/core/constants/app_sizes.dart';
-import 'package:shop/data/providers/auth_providers.dart';
+import 'package:shop/providers/auth_providers.dart';
 import 'package:shop/presentation/screens/auth/views/components/countrypicker.dart';
 import 'package:shop/presentation/screens/auth/views/components/sign_up_form.dart';
 import 'package:shop/core/constants/route_constants.dart';
@@ -177,7 +175,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final TextEditingController addressC = TextEditingController();
   final TextEditingController nameC = TextEditingController();
   bool isLoading = false;
-
   Future<void> registerUser() async {
     setState(() => isLoading = true);
 
@@ -186,20 +183,35 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       "username": userNameC.text.trim(),
       "email": emailC.text.trim(),
       "password": passC.text.trim(),
-      "roleid": "1",
+      "roleid": 1,
       "phone": mobileC.text.trim(),
-      "phonecode": "",
-      "countryid": ref.read(selectedCountryProvider),
-      "stateid": ref.read(selectedStateProvider),
-      "cityid": ref.read(selectedCityProvider),
-      "address": addressC.text,
-      "postalcode": postalCodeC.text,
+      "phonecode": int.tryParse(ref.read(selectedCountryCallingCodeProvider) ?? "0"),
+      "country_id": int.tryParse(ref.read(selectedCountryProvider) ?? "0"),
+      "state_id": int.tryParse(ref.read(selectedStateProvider) ?? "0"),
+      "city_id": int.tryParse(ref.read(selectedCityProvider) ?? "0"),
+      "address": addressC.text.trim(),
+      "postalcode": postalCodeC.text.trim(),
     };
 
     final result =
         await ref.read(authProvidersProvider.notifier).registerUser(body);
+    print("📩 Register response: $result");
 
     setState(() => isLoading = false);
+
+    if (result["success"] == true) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Registered Successfully")),
+      );
+      context.pushNamed(RoutesName.logInScreenRoute);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(result["message"] ?? "Registration failed"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   @override

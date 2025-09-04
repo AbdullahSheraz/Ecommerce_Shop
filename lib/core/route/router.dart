@@ -138,11 +138,35 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shop/data/services/auth_local_storage_services.dart';
 import 'package:shop/entry_point.dart';
+import 'package:shop/presentation/screens/home/views/components/brandsGridView.dart';
+import 'package:shop/presentation/screens/home/views/components/gridViewCategories.dart';
 import 'screen_export.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: RoutesPath.logInScreenPath,
+  redirect: (context, state) async {
+  final loggedIn = await AuthLocalStorage.isLoggedIn();
+
+  final publicRoutes = [
+    RoutesPath.logInScreenPath,
+    RoutesPath.signUpScreenPath,
+    RoutesPath.passwordRecoveryScreenPath,
+  ];
+
+  final goingPublic = publicRoutes.contains(state.matchedLocation);
+
+  if (!loggedIn && !goingPublic) {
+     return RoutesPath.logInScreenPath;
+  } else if (loggedIn && goingPublic) {
+ 
+    return '/dum';
+  }
+
+  return null; 
+
+  },
   routes: [
     GoRoute(
       path: RoutesPath.onbordingScreenPath,
@@ -185,7 +209,6 @@ final GoRouter router = GoRouter(
       },
     ),
 
-    // Dummy routes
     GoRoute(
       path: '/dum',
       name: 'dum',
@@ -256,10 +279,18 @@ final GoRouter router = GoRouter(
       name: RoutesName.preferencesScreenRoute,
       pageBuilder: (context, state) => _buildPage(const PreferencesScreen()),
     ),
+    GoRoute(
+      path: RoutesPath.categoryGridPath,
+      name: RoutesName.categoryGridRoute,
+      pageBuilder: (context, state) => _buildPage(const CategoriesGrid()),
+    ),
+    GoRoute(
+      path: RoutesPath.brandGridPath,
+      name: RoutesName.brandGridRoute,
+      pageBuilder: (context, state) => _buildPage(const BrandsGrid()),
+    ),
   ],
   errorPageBuilder: (context, state) => _buildPage(const OnBordingScreen()),
 );
 
-Page _buildPage(Widget child) {
-  return MaterialPage(child: child);
-}
+Page _buildPage(Widget child) => MaterialPage(child: child);

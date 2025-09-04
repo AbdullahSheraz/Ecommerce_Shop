@@ -7,8 +7,9 @@ class ResetForm extends StatelessWidget {
   const ResetForm({
     super.key,
     required this.formKey,
+    required this.emailC
   });
-
+  final TextEditingController emailC;
   final GlobalKey<FormState> formKey;
 
   @override
@@ -29,9 +30,7 @@ class ResetForm extends StatelessWidget {
           ),
           gapH4,
           TextFormField(
-            onSaved: (reset) {
-              
-            },
+            onSaved: (reset) {},
             validator: emaildValidator.call,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
@@ -54,22 +53,21 @@ class ResetForm extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               errorBorder: OutlineInputBorder(
-                borderSide:const  BorderSide(color: Colors.red, width: 1),
+                borderSide: const BorderSide(color: Colors.red, width: 1),
                 borderRadius: BorderRadius.circular(12),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderSide:const  BorderSide(color: Colors.red, width: 1),
+                borderSide: const BorderSide(color: Colors.red, width: 1),
                 borderRadius: BorderRadius.circular(12),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide:const  BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.black26,
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
           ),
-         
         ],
       ),
     );

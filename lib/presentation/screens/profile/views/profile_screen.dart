@@ -1,40 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop/core/constants/constants.dart';
 import 'package:shop/core/constants/app_sizes.dart';
 import 'package:shop/core/constants/route_constants.dart';
+import 'package:shop/presentation/screens/profile/views/components/profile_shimmer.dart';
+import 'package:shop/providers/auth_providers.dart';
+import 'package:shop/providers/auth_state.dart';
+import 'package:shop/data/services/auth_local_storage_services.dart';
 
 import 'components/profile_card.dart';
 import 'components/profile_menu_item_list_tile.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final userAsync = ref.watch(userProfileProvider);
+    final auth = AuthLocalStorage.getToken();
     return Scaffold(
       body: RefreshIndicator(
         color: primaryColor,
         backgroundColor: Colors.white,
         onRefresh: () async {
-          await Future.delayed(const Duration(seconds: 3));
-          setState(() {});
+          ref.refresh(userProfileProvider);
         },
         child: ListView(
           children: [
-            ProfileCard(
-              name: "Ahmad",
-              email: "itsTechWorld@gmail.com",
-              imageSrc: 'assets/images/its.jpg',
-              press: () {
-                context.pushNamed(RoutesName.userInfoScreenRoute);
-              },
+            userAsync.when(
+              skipLoadingOnRefresh: false,
+              data: (user) => Column(
+                children: [
+                  ProfileCard(
+                    name: user.name,
+                    email: user.email,
+                    imageSrc: user.imageUrl ?? "assets/images/default.png",
+                    press: () {
+                      //  context.pushNamed(RoutesName.userInfoScreenRoute);
+                    },
+                  ),
+                ],
+              ),
+              loading: () => const ProfileCardShimmer(),
+              error: (e, _) => Center(child: Text("Error: $e")),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
@@ -97,7 +112,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               press: () {},
             ),
             ListTile(
-              onTap: () {},
+              onTap: () async {
+                await AuthLocalStorage.logout();
+                ref.read(authProvider.notifier).logout();
+                context.go(RoutesPath.logInScreenPath);
+              },
               minLeadingWidth: 24,
               leading: SvgPicture.asset(
                 "assets/icons/Logout.svg",

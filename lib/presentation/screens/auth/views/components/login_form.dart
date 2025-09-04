@@ -4,9 +4,12 @@ import 'package:shop/core/constants/app_sizes.dart';
 import 'package:shop/core/constants/constants.dart';
 
 class LogInForm extends StatelessWidget {
+  final TextEditingController emailC, passC;
   const LogInForm({
     super.key,
     required this.formKey,
+    required this.emailC,
+    required this.passC,
   });
 
   final GlobalKey<FormState> formKey;
@@ -29,13 +32,14 @@ class LogInForm extends StatelessWidget {
           ),
           gapH4,
           TextFormField(
+            controller: emailC,
             onSaved: (email) {
               // Save email
             },
             validator: emaildValidator.call,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
-            cursorColor:primaryColor,
+            cursorColor: primaryColor,
             decoration: InputDecoration(
               hintText: "abc@gmail.com",
               hintStyle: TextStyle(color: Colors.grey.withValues(alpha: 0.3)),
@@ -54,15 +58,15 @@ class LogInForm extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               errorBorder: OutlineInputBorder(
-                borderSide:const  BorderSide(color: Colors.red, width: 1),
+                borderSide: const BorderSide(color: Colors.red, width: 1),
                 borderRadius: BorderRadius.circular(12),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderSide:const  BorderSide(color: Colors.red, width: 1),
+                borderSide: const BorderSide(color: Colors.red, width: 1),
                 borderRadius: BorderRadius.circular(12),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide:const  BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.black26,
                 ),
                 borderRadius: BorderRadius.circular(12),
@@ -79,8 +83,8 @@ class LogInForm extends StatelessWidget {
           ),
           gapH4,
           TextFormField(
-            onSaved: (pass) {
-            },
+            controller: passC,
+            onSaved: (pass) {},
             validator: passwordValidator.call,
             obscureText: true,
             cursorColor: primaryColor,
@@ -102,15 +106,15 @@ class LogInForm extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               errorBorder: OutlineInputBorder(
-                borderSide:const  BorderSide(color: Colors.red, width: 1),
+                borderSide: const BorderSide(color: Colors.red, width: 1),
                 borderRadius: BorderRadius.circular(12),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderSide:const  BorderSide(color: Colors.red, width: 1),
+                borderSide: const BorderSide(color: Colors.red, width: 1),
                 borderRadius: BorderRadius.circular(12),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide:const  BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.black26,
                 ),
                 borderRadius: BorderRadius.circular(12),

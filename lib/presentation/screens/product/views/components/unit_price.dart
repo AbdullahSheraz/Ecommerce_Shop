@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop/core/constants/app_sizes.dart';
 
-import 'package:shop/core/constants/constants.dart';
 
 class UnitPrice extends StatelessWidget {
   const UnitPrice({

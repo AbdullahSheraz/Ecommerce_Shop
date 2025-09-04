@@ -11,6 +11,7 @@ import 'package:shop/models/product_model.dart';
 import 'package:shop/presentation/screens/discover/views/components/discover_categoryBtn.dart';
 import 'package:shop/presentation/screens/home/views/components/categories.dart';
 import 'package:shop/presentation/screens/product/product_details_screen.dart';
+import 'package:shop/providers/auth_providers.dart';
 
 class DiscoverScreen extends ConsumerStatefulWidget {
   final String? selectedCategory;
@@ -68,9 +69,12 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final categoriesAsync = ref.watch(categoriesProvider);
+
     return Scaffold(
-      body: RefreshIndicator( color: primaryColor,
-                  backgroundColor: Colors.white,
+      body: RefreshIndicator(
+        color: primaryColor,
+        backgroundColor: Colors.white,
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 3));
           setState(() {});
@@ -97,30 +101,29 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                         color: Colors.grey.withValues(alpha: 0.15),
                         width: 1.0,
                       ),
-                      borderRadius:const  BorderRadius.all(Radius.circular(30)),
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.grey.withValues(alpha: 0.15),
                         width: 1.0,
                       ),
-                      borderRadius:const  BorderRadius.all(Radius.circular(30)),
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
                     ),
                     prefixIcon: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 6),
                       child: Container(
-                        padding:const EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.grey.withValues(alpha: 0.07)),
                         child: SvgPicture.asset(
                           "assets/icons/Search.svg",
                           height: 22,
-                      
                           color: Theme.of(context)
                               .iconTheme
                               .color!
-                              .withValues(alpha:  0.3),
+                              .withValues(alpha: 0.3),
                         ),
                       ),
                     ),
@@ -132,7 +135,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                 child: Row(
                   children: [
                     Padding(
-                      padding:const  EdgeInsets.only(left: defaultPadding + 2),
+                      padding: const EdgeInsets.only(left: defaultPadding + 2),
                       child: CategoryButton(
                         category: "All",
                         isActive: selectedCategory == "All",
@@ -143,26 +146,40 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                         },
                       ),
                     ),
-                    ...demoCategories.map((category) {
-                      bool isActive = selectedCategory == category.name;
-                      return Padding(
-                        padding:const  EdgeInsets.only(left: defaultPadding / 2),
-                        child: CategoryButton(
-                          category: category.name,
-                          isActive: isActive,
-                          press: () {
-                            setState(() {
-                              selectedCategory = category.name;
-                            });
-                          },
-                        ),
-                      );
-                    }),
+                    categoriesAsync.when(
+                      data: (categories) {
+                        return Row(
+                          children: [
+                            ...categories.map((category) {
+                              final name = category.name;
+                              bool isActive = selectedCategory == name;
+
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    left: defaultPadding / 2),
+                                child: CategoryButton(
+                                  category: name,
+                                  isActive: isActive,
+                                  press: () {
+                                    setState(() {
+                                      selectedCategory = name;
+                                    });
+                                  },
+                                ),
+                              );
+                            }).toList(),
+                          ],
+                        );
+                      },
+                      loading: () =>
+                          const Center(child: CircularProgressIndicator()),
+                      error: (err, stack) => Center(child: Text('Error: $err')),
+                    ),
                   ],
                 ),
               ),
               Padding(
-                padding:const EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                     horizontal: defaultPadding, vertical: defaultPadding / 2),
                 child: Text(
                   "${getProducts().length} Products",

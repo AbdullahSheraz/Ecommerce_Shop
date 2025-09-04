@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop/presentation/components/dot_indicators.dart';
 import 'package:shop/core/constants/constants.dart';

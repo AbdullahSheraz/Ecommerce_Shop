@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shop/core/constants/constants.dart';
 import 'package:shop/core/constants/app_sizes.dart';
 import 'package:shop/presentation/screens/auth/views/components/reset_form.dart';
-
-
-class PasswordRecoveryScreen extends StatefulWidget {
+ 
+class PasswordRecoveryScreen extends ConsumerStatefulWidget {
   const PasswordRecoveryScreen({super.key});
 
   @override
-  State<PasswordRecoveryScreen> createState() => _PasswordRecoveryScreenState();
+  ConsumerState<PasswordRecoveryScreen> createState() =>
+      _PasswordRecoveryScreenState();
 }
 
-class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
+class _PasswordRecoveryScreenState
+    extends ConsumerState<PasswordRecoveryScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  final TextEditingController emailController = TextEditingController();
+  bool isLoading = false;
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,9 +27,9 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
           child: Column(
             children: [
               Image.asset(
+                "assets/images/its.jpg",
                 height: 110,
                 width: 110,
-                "assets/images/its.jpg",
                 fit: BoxFit.fill,
               ),
               gapH10,
@@ -35,67 +39,45 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
                   children: [
                     const Align(
                       alignment: Alignment.center,
-                      child: Text("Forget Password  UI",
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.w600)),
+                      child: Text(
+                        "Forget Password UI",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.w600),
+                      ),
                     ),
-                    // gapH8,
-                    // const Text("Enter your email to reset your password.",
-                    //     style: TextStyle(
-                    //         fontSize: 13, fontWeight: FontWeight.w600)),
                     gapH32,
-                    ResetForm(formKey: formKey),
-
+                    ResetForm(
+                      formKey: formKey,
+                      emailC: emailController,  
+                    ),
                     gapH32,
                     InkWell(
-                      onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          // context.pushNamed('dum');
-                        }
-                      },
+                      onTap: isLoading ? null : null,
                       child: Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: primaryColor),
-                          child: const Center(
-                            child: Text(
-                              "RESET PASSWORD",
-                              style: TextStyle(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: primaryColor),
+                        child: Center(
+                          child: isLoading
+                              ? const CircularProgressIndicator(
                                   color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          )),
+                                )
+                              : const Text(
+                                  "RESET PASSWORD",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                        ),
+                      ),
                     ),
                     gapH20,
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     const Text(
-                    //       "Don't have an account?",
-                    //       style: TextStyle(
-                    //           fontSize: 13, fontWeight: FontWeight.w400),
-                    //     ),
-                    //     gapW4,
-                    //     InkWell(
-                    //       onTap: () {
-                    //         context.pushNamed(RoutesName.signUpScreenRoute);
-                    //       },
-                    //       child: const Text(
-                    //         "Sign up",
-                    //         style: TextStyle(
-                    //             color: primaryColor,
-                    //             fontSize: 14,
-                    //             fontWeight: FontWeight.w400),
-                    //       ),
-                    //     )
-                    //   ],
-                    // ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

@@ -72,10 +72,14 @@ class RoutesName {
   static const String importedTilesScreenRoute = "importedTiles";
   static const String sanitaryWareScreenRoute = "sanitaryWare";
   static const String itemRoute = 'item';
+  static const String categoryGridRoute = 'categoryGrid';
+  static const String brandGridRoute = 'brandGrid';
 }
 
 class RoutesPath {
   static const String onbordingScreenPath = "/onbording";
+  static const String categoryGridPath = '/categoryGrid';
+  static const String brandGridPath = '/brandGrid';
   static const String notificationPermissionScreenPath =
       "/notification_permission";
   static const String preferredLanuageScreenPath = "/preferred_language";
@@ -147,6 +151,5 @@ class RoutesPath {
   static const String floorTilesScreenPath = "/floorTiles";
   static const String importedTilesScreenPath = "/importedTiles";
   static const String sanitaryWareScreenPath = "/sanitaryWare";
-    static const String itemPath = '/item';
-
+  static const String itemPath = '/item';
 }

@@ -1,5 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shop/data/services/auth_services.dart';
+import 'package:shop/models/brand_model.dart';
+import 'package:shop/models/category_model.dart';
+import 'package:shop/models/user_model.dart';
 part 'auth_repository.g.dart';
 
 @riverpod
@@ -13,9 +16,70 @@ class AuthRepository {
   Future<Map<String, dynamic>> registerUser(Map<String, dynamic> body) async {
     try {
       final result = await authService.registerUser(body);
+
+      if (result["status"] == 422 && result["validator_errors"] != null) {
+        final errors = result["validator_errors"];
+        final firstError = (errors.values.first as List).first.toString();
+        return {
+          "success": false,
+          "message": firstError,
+        };
+      }
+
       return result;
+    } catch (e, _) {
+      return {
+        "success": false,
+        "message": "Registration failed: $e",
+      };
+    }
+  }
+
+  Future<Map<String, dynamic>> loginUser(Map<String, dynamic> body) async {
+    final result = await authService.loginUser(body);
+
+    try {
+      if (result["status"] == 401 && result["message"] != null) {
+        final errors = result["message"];
+        final firstError = (errors.values.first as List).first.toString();
+        return {
+          "success": false,
+          "message": firstError,
+        };
+      }
+      return result;
+    } catch (e, _) {
+      return {
+        "success": false,
+        "message": result["message"].toString(),
+      };
+    }
+  }
+
+  Future<UserModel> userInfo() async {
+    try {
+      final result = await authService.fetchUserProfile();
+      return result;
+    } catch (e, _) {
+      throw Exception("userInfo failed: $e");
+    }
+  }
+
+  Future<List<Category>> fetchCategories() async {
+    try {
+      return await authService.getCategory();
     } catch (e) {
-      throw Exception("Error Occured");
+      print('Error fetching categories: $e');
+      throw Exception('Failed to fetch categories: $e');
+    }
+  }
+
+  Future<List<Brand>> fetchBrands() async {
+    try {
+      return await authService.getBrand();
+    } catch (e) {
+      print('Error fetching categories: $e');
+      throw Exception('Failed to fetch categories: $e');
     }
   }
 }

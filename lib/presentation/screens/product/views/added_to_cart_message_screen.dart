@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop/core/constants/constants.dart';
 import 'package:shop/core/constants/app_sizes.dart';
-import 'package:shop/core/route/screen_export.dart';
 
 class AddedToCartMessageScreen extends StatelessWidget {
   const AddedToCartMessageScreen({super.key});

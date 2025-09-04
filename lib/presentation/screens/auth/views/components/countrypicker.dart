@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shop/core/constants/app_sizes.dart';
-import 'package:shop/data/providers/common_providers.dart';
+import 'package:shop/providers/common_providers.dart';
 
 final selectedCountryProvider = StateProvider<String?>((ref) => null);
 final selectedStateProvider = StateProvider<String?>((ref) => null);
 final selectedCityProvider = StateProvider<String?>((ref) => null);
+final selectedCountryCallingCodeProvider =
+    StateProvider<String?>((ref) => null);
 
 class CountryStateCityDropdown extends ConsumerWidget {
   const CountryStateCityDropdown({super.key});
@@ -42,13 +44,13 @@ class CountryStateCityDropdown extends ConsumerWidget {
     final selectedCountry = ref.watch(selectedCountryProvider);
     final selectedState = ref.watch(selectedStateProvider);
     final selectedCity = ref.watch(selectedCityProvider);
-    
-    final countriesAsync = ref.watch(countriesProvider);
+
+    final countriesAsync = ref.watch(getCountriesProvider);
     final statesAsync = selectedCountry != null
-        ? ref.watch(statesProvider(selectedCountry))
+        ? ref.watch(getStatesProvider(selectedCountry))
         : const AsyncValue.data([]);
     final citiesAsync = (selectedCountry != null && selectedState != null)
-        ? ref.watch(citiesProvider(selectedCountry, selectedState))
+        ? ref.watch(getCitiesProvider(selectedCountry, selectedState))
         : const AsyncValue.data([]);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,6 +61,7 @@ class CountryStateCityDropdown extends ConsumerWidget {
         countriesAsync.when(
           data: (countries) => DropdownButtonFormField<String>(
             value: selectedCountry,
+            dropdownColor: Colors.white,
             decoration: dropdownDecoration(context, "Select Country"),
             items: countries.map((c) {
               return DropdownMenuItem(
@@ -70,10 +73,37 @@ class CountryStateCityDropdown extends ConsumerWidget {
               ref.read(selectedCountryProvider.notifier).state = value;
               ref.read(selectedStateProvider.notifier).state = null;
               ref.read(selectedCityProvider.notifier).state = null;
+              final selectedCountryObj =
+                  countries.firstWhere((c) => c['value'].toString() == value);
+              ref.read(selectedCountryCallingCodeProvider.notifier).state =
+                  selectedCountryObj['calling_code'].toString();
             },
           ),
-          loading: () => const CircularProgressIndicator(),
-          error: (e, _) => Text("Error loading countries: $e"),
+          loading: () => Container(
+            height: 50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey.shade400),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            alignment: Alignment.center,
+            child: const SizedBox(
+              height: 24,
+              width: 24,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+          ),
+          error: (e, _) => Container(
+            height: 50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.red.shade400),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            alignment: Alignment.center,
+            child: Text("Error loading countries",
+                style: TextStyle(color: Colors.red)),
+          ),
         ),
         gapH16,
         const Text('State',
@@ -82,6 +112,7 @@ class CountryStateCityDropdown extends ConsumerWidget {
         statesAsync.when(
           data: (states) => DropdownButtonFormField<String>(
             value: selectedState,
+            dropdownColor: Colors.white,
             decoration: dropdownDecoration(context, "Select State"),
             items: states.map((s) {
               return DropdownMenuItem(
@@ -94,8 +125,31 @@ class CountryStateCityDropdown extends ConsumerWidget {
               ref.read(selectedCityProvider.notifier).state = null;
             },
           ),
-          loading: () => const CircularProgressIndicator(),
-          error: (e, _) => Text("Error loading states: $e"),
+          loading: () => Container(
+            height: 50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey.shade400),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            alignment: Alignment.center,
+            child: const SizedBox(
+              height: 24,
+              width: 24,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+          ),
+          error: (e, _) => Container(
+            height: 50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.red.shade400),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            alignment: Alignment.center,
+            child: const Text("Error loading state",
+                style: TextStyle(color: Colors.red)),
+          ),
         ),
         gapH16,
         const Text('City',
@@ -104,6 +158,7 @@ class CountryStateCityDropdown extends ConsumerWidget {
         citiesAsync.when(
           data: (cities) => DropdownButtonFormField<String>(
             value: selectedCity,
+            dropdownColor: Colors.white,
             decoration: dropdownDecoration(context, "Select City"),
             items: cities.map((ct) {
               return DropdownMenuItem(
@@ -115,8 +170,31 @@ class CountryStateCityDropdown extends ConsumerWidget {
               ref.read(selectedCityProvider.notifier).state = value;
             },
           ),
-          loading: () => const CircularProgressIndicator(),
-          error: (e, _) => Text("Error loading cities: $e"),
+          loading: () => Container(
+            height: 50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey.shade400),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            alignment: Alignment.center,
+            child: const SizedBox(
+              height: 24,
+              width: 24,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+          ),
+          error: (e, _) => Container(
+            height: 50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.red.shade400),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            alignment: Alignment.center,
+            child: const Text("Error loading cities",
+                style: TextStyle(color: Colors.red)),
+          ),
         ),
       ],
     );

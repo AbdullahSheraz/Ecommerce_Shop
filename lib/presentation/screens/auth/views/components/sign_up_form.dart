@@ -84,7 +84,7 @@ class SignUpForm extends StatelessWidget {
           const Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'UserName',
+              'userName',
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
           ),
@@ -104,6 +104,53 @@ class SignUpForm extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
                 child: SvgPicture.asset(
                   "assets/icons/Profile.svg",
+                  height: 24,
+                  width: 24,
+                  colorFilter: ColorFilter.mode(baseGrey, BlendMode.srcIn),
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: baseGrey, width: 1.2),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.red, width: 1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.red, width: 1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.black26),
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),
+          gapH16,
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Email',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+          ),
+          gapH4,
+          TextFormField(
+            controller: emailC,
+            onSaved: (email) {},
+            validator: emaildValidator.call,
+            textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.emailAddress,
+            cursorColor: primaryColor,
+            decoration: InputDecoration(
+              hintText: "abc@gmail.com",
+              hintStyle: TextStyle(color: Colors.grey.withValues(alpha: 0.3)),
+              prefixIcon: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+                child: SvgPicture.asset(
+                  "assets/icons/Message.svg",
                   height: 24,
                   width: 24,
                   colorFilter: ColorFilter.mode(baseGrey, BlendMode.srcIn),
@@ -170,6 +217,55 @@ class SignUpForm extends StatelessWidget {
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: Colors.black26),
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),
+          gapH16,
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Password',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+          ),
+          gapH4,
+          TextFormField(
+            controller: passC,
+            onSaved: (pass) {},
+            validator: passwordValidator.call,
+            obscureText: true,
+            keyboardType: TextInputType.visiblePassword,
+            cursorColor: primaryColor,
+            decoration: InputDecoration(
+              hintText: "**********",
+              hintStyle: TextStyle(color: Colors.grey.withValues(alpha: 0.3)),
+              prefixIcon: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
+                child: SvgPicture.asset(
+                  "assets/icons/Lock.svg",
+                  height: 24,
+                  width: 24,
+                  colorFilter: ColorFilter.mode(baseGrey, BlendMode.srcIn),
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: baseGrey, width: 1.2),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Colors.black26,
+                ),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.red, width: 1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.red, width: 1),
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
@@ -269,101 +365,6 @@ class SignUpForm extends StatelessWidget {
             ),
           ),
           gapH16,
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Email',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-            ),
-          ),
-          gapH4,
-          TextFormField(
-            controller: emailC,
-            onSaved: (email) {},
-            validator: emaildValidator.call,
-            textInputAction: TextInputAction.next,
-            keyboardType: TextInputType.emailAddress,
-            cursorColor: primaryColor,
-            decoration: InputDecoration(
-              hintText: "abc@gmail.com",
-              hintStyle: TextStyle(color: Colors.grey.withValues(alpha: 0.3)),
-              prefixIcon: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
-                child: SvgPicture.asset(
-                  "assets/icons/Message.svg",
-                  height: 24,
-                  width: 24,
-                  colorFilter: ColorFilter.mode(baseGrey, BlendMode.srcIn),
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: baseGrey, width: 1.2),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.red, width: 1),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.red, width: 1),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.black26),
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
-          gapH16,
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Password',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-            ),
-          ),
-          gapH4,
-          TextFormField(
-            controller: passC,
-            onSaved: (pass) {},
-            validator: passwordValidator.call,
-            obscureText: true,
-            keyboardType: TextInputType.visiblePassword,
-            cursorColor: primaryColor,
-            decoration: InputDecoration(
-              hintText: "**********",
-              hintStyle: TextStyle(color: Colors.grey.withValues(alpha: 0.3)),
-              prefixIcon: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: defaultPadding * 0.75),
-                child: SvgPicture.asset(
-                  "assets/icons/Lock.svg",
-                  height: 24,
-                  width: 24,
-                  colorFilter: ColorFilter.mode(baseGrey, BlendMode.srcIn),
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: baseGrey, width: 1.2),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Colors.black26,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.red, width: 1),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.red, width: 1),
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),  gapH16,
           CountryStateCityDropdown()
         ],
       ),

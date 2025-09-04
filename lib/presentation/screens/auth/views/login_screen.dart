@@ -1,20 +1,70 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop/core/constants/constants.dart';
 import 'package:shop/core/constants/app_sizes.dart';
 import 'package:shop/core/constants/route_constants.dart';
+import 'package:shop/providers/auth_providers.dart';
+import 'package:shop/data/services/auth_local_storage_services.dart';
 
 import 'components/login_form.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  TextEditingController emailC = TextEditingController();
+  TextEditingController passC = TextEditingController();
+
+  Future<void> authenticateUser(BuildContext context, WidgetRef ref) async {
+    if (formKey.currentState!.validate()) {
+      final body = {
+        "email": emailC.text.trim(),
+        "password": passC.text.trim(),
+      };
+
+      final auth = ref.read(authProvidersProvider.notifier);
+      final result = await auth.loginUser(body);
+
+      if (result["success"] == true ||
+          result["message"] == "Login successful") {
+        final userId = result["userid"].toString();
+        final token = result["token"] ?? "";
+        if (token.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("No token returned from API")),
+          );
+          return;
+        }
+
+        await AuthLocalStorage.saveLogin(token, userId);
+
+        print(AuthLocalStorage.tokenKey);
+        print("✅ Login success, saved userId: $userId and token: $token");
+
+        context.goNamed('dum');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(result["message"])),
+        );
+      }
+    }
+  }
+
+  String generateRandomToken(int length) {
+    const chars =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    final rand = Random();
+    return List.generate(length, (index) => chars[rand.nextInt(chars.length)])
+        .join();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +97,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.w600)),
                     gapH32,
-                    LogInForm(formKey: formKey),
+                    LogInForm(
+                      formKey: formKey,
+                      emailC: emailC,
+                      passC: passC,
+                    ),
                     gapH10,
                     Align(
                       alignment: Alignment.centerRight,
@@ -60,18 +114,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: Colors.black87),
                         ),
                         onTap: () {
-                            // context.pushNamed('dum');
-                          context
-                              .pushNamed(RoutesName.passwordRecoveryScreenRoute);
+                          context.pushNamed(
+                              RoutesName.passwordRecoveryScreenRoute);
                         },
                       ),
                     ),
                     gapH64,
                     InkWell(
-                      onTap: () {
-                       if (formKey.currentState!.validate()) {
-                          context.pushNamed('dum');
-                        }
+                      onTap: () async {
+                        await authenticateUser(context, ref);
                       },
                       child: Container(
                           width: double.infinity,
