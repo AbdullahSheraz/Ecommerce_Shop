@@ -1,6 +1,3 @@
- 
-
-
 Map<String, String> defaultHeaders = {
   "Content-Type": "application/json",
   "Accept": "application/json",
@@ -14,5 +11,7 @@ String getUserInfo = '$api/edit-app-user';
 String getCountry = '$api/get-countries';
 String getState = '$api/get-countrywise-states';
 String getCity = '$api/get-countrywise-cities';
-String getCategories = '$api/get-item-cats';
-String getBrands = '$api/get-item-brands';
+String getCountryCode = '$api/get-country-codes';
+String getCategory = '$api/get-item-cats';
+String getBrand = '$api/get-item-brands';
+String getAllItems = '$api/get-app-items';

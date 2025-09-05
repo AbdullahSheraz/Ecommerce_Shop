@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shop/providers/auth_providers.dart'; 
-import 'package:shop/core/constants/app_sizes.dart';
+ import 'package:shop/core/constants/app_sizes.dart';
+import 'package:shop/providers/product_providers.dart';
  
-class BrandsCategory extends ConsumerWidget {
-  const BrandsCategory({super.key});
+class Categories extends ConsumerWidget {
+  const Categories({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final brandAsync = ref.watch(brandsProvider);
+    final categoriesAsync =ref.watch(getCategoriesProvider);
 
-    return brandAsync.when(
+    return categoriesAsync.when(
       data: (categories) {
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: categories.map((category) {
-              final isActive = false;
-              return Padding(
+               return Padding(
                 padding: const EdgeInsets.only(left: 18),
                 child: InkWell(
                   onTap: () {
-                 
-                  },
+                   },
                   borderRadius: const BorderRadius.all(Radius.circular(35)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +31,8 @@ class BrandsCategory extends ConsumerWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
-                          border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                          border:
+                              Border.all(color: Colors.grey.withValues(alpha:0.5)),
                           image: category.imageUrl != null
                               ? DecorationImage(
                                   image: NetworkImage(category.imageUrl!),
@@ -48,9 +47,10 @@ class BrandsCategory extends ConsumerWidget {
                         style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w500,
-                          color: Theme.of(context).brightness == Brightness.light
-                              ? Colors.black
-                              : Colors.white,
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Colors.black
+                                  : Colors.white,
                         ),
                       ),
                     ],

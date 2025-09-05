@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:shop/providers/auth_providers.dart';
+import 'package:shop/providers/product_providers.dart';
 
 class CategoriesGrid extends ConsumerWidget {
   const CategoriesGrid({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoriesAsync = ref.watch(categoriesProvider);
+    final categoriesAsync = ref.watch(getCategoriesProvider);
 
     return Scaffold(  appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: Icon(LucideIcons.chevronLeft),
-        title: Text('Browse Category'),
+        leading:const Icon(LucideIcons.chevronLeft),
+        title:const  Text('Browse Category'),
       ),
       body: categoriesAsync.when(
         data: (categories) {
@@ -31,7 +31,7 @@ class CategoriesGrid extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
+                          color: Colors.black.withValues(alpha:0.05),
                           blurRadius: 5,
                           offset: const Offset(2, 2),
                         ),

@@ -9,7 +9,6 @@ import 'package:shop/presentation/screens/profile/views/components/profile_shimm
 import 'package:shop/providers/auth_providers.dart';
 import 'package:shop/providers/auth_state.dart';
 import 'package:shop/data/services/auth_local_storage_services.dart';
-
 import 'components/profile_card.dart';
 import 'components/profile_menu_item_list_tile.dart';
 
@@ -24,8 +23,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final userAsync = ref.watch(userProfileProvider);
-    final auth = AuthLocalStorage.getToken();
-    return Scaffold(
+     return Scaffold(
       body: RefreshIndicator(
         color: primaryColor,
         backgroundColor: Colors.white,
@@ -41,7 +39,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ProfileCard(
                     name: user.name,
                     email: user.email,
-                    imageSrc: user.imageUrl ?? "assets/images/default.png",
+                    imageSrc: user.imageUrl,
                     press: () {
                       //  context.pushNamed(RoutesName.userInfoScreenRoute);
                     },

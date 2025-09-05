@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shop/core/constants/app_sizes.dart';
@@ -10,7 +11,7 @@ import '../../../providers/cart_item_provider.dart';
 class SecondaryProductCard extends ConsumerWidget {
   const SecondaryProductCard({
     super.key,
-    required this.image,
+    required this.images,
     required this.brandName,
     required this.title,
     required this.price,
@@ -20,9 +21,10 @@ class SecondaryProductCard extends ConsumerWidget {
     this.onTapButton,
   });
 
-  final String image, brandName, title;
-  final double price;
-  final double? priceAfterDiscount;
+  final String  brandName, title;
+  final String price;  final List<String> images; 
+
+  final String? priceAfterDiscount;
   final int? discountPercent;
   final VoidCallback? onPress;
   final VoidCallback? onTapButton;
@@ -34,7 +36,7 @@ class SecondaryProductCard extends ConsumerWidget {
     final cartItem = cartItems.firstWhere(
       (item) => item.title == title,
       orElse: () => CartItem(
-        image: image,
+        image: images.first,
         price: price,
         discountPrice: priceAfterDiscount ?? price,
         brandName: brandName,
@@ -65,7 +67,7 @@ class SecondaryProductCard extends ConsumerWidget {
               aspectRatio: 1.15,
               child: Stack(
                 children: [
-                  Image.asset(image, fit: BoxFit.contain),
+                  CachedNetworkImage(imageUrl:images.first, fit: BoxFit.contain),
                   if (discountPercent != null)
                     Positioned(
                       right: defaultPadding / 2,
@@ -226,7 +228,7 @@ class SecondaryProductCard extends ConsumerWidget {
                         onTap: () {
                           ref.read(cartProvider.notifier).addToCart(
                                 CartItem(
-                                  image: image,
+                                  image: images.first,
                                   price: price,
                                   discountPrice: priceAfterDiscount ?? price,
                                   brandName: brandName,

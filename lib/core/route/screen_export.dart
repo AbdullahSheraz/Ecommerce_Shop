@@ -1,7 +1,7 @@
 export '../../presentation/screens/onbording/views/onbording_screnn.dart';
 export '../../presentation/screens/auth/views/login_screen.dart';
 export '../../presentation/screens/auth/views/password_recovery_screen.dart';
-export '../../presentation/screens/auth/views/signup_screen.dart';
+export '../../presentation/screens/auth/views/register_screen.dart';
 export '../constants/route_constants.dart';
 export '../../presentation/screens/bookmark/views/bookmark_screen.dart';
 export '../../presentation/screens/discover/views/discover_screen.dart';

@@ -6,11 +6,11 @@ part of 'common_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getCountriesHash() => r'1a92303f7e456f51f6403fee1ff00e5d178873c4';
+String _$getCountriesHash() => r'299fec45257ead3be16b919a7afcddaa0729da33';
 
 /// See also [getCountries].
 @ProviderFor(getCountries)
-final getCountriesProvider = AutoDisposeFutureProvider<List<dynamic>>.internal(
+final getCountriesProvider = FutureProvider<List<dynamic>>.internal(
   getCountries,
   name: r'getCountriesProvider',
   debugGetCreateSourceHash:
@@ -21,8 +21,8 @@ final getCountriesProvider = AutoDisposeFutureProvider<List<dynamic>>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef GetCountriesRef = AutoDisposeFutureProviderRef<List<dynamic>>;
-String _$getStatesHash() => r'a521a21203fe08a00f15d0dff1b9db213f54849f';
+typedef GetCountriesRef = FutureProviderRef<List<dynamic>>;
+String _$getStatesHash() => r'028770bebd4dc4a518c299d53e6971fd7736f639';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -88,7 +88,7 @@ class GetStatesFamily extends Family<AsyncValue<List<dynamic>>> {
 }
 
 /// See also [getStates].
-class GetStatesProvider extends AutoDisposeFutureProvider<List<dynamic>> {
+class GetStatesProvider extends FutureProvider<List<dynamic>> {
   /// See also [getStates].
   GetStatesProvider(
     String countryId,
@@ -139,7 +139,7 @@ class GetStatesProvider extends AutoDisposeFutureProvider<List<dynamic>> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<List<dynamic>> createElement() {
+  FutureProviderElement<List<dynamic>> createElement() {
     return _GetStatesProviderElement(this);
   }
 
@@ -159,20 +159,20 @@ class GetStatesProvider extends AutoDisposeFutureProvider<List<dynamic>> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin GetStatesRef on AutoDisposeFutureProviderRef<List<dynamic>> {
+mixin GetStatesRef on FutureProviderRef<List<dynamic>> {
   /// The parameter `countryId` of this provider.
   String get countryId;
 }
 
-class _GetStatesProviderElement
-    extends AutoDisposeFutureProviderElement<List<dynamic>> with GetStatesRef {
+class _GetStatesProviderElement extends FutureProviderElement<List<dynamic>>
+    with GetStatesRef {
   _GetStatesProviderElement(super.provider);
 
   @override
   String get countryId => (origin as GetStatesProvider).countryId;
 }
 
-String _$getCitiesHash() => r'9f06119991d441e1ee1fcd71516ea4ece3ac478e';
+String _$getCitiesHash() => r'6498d8039f30cc5ad061dfa35b7b0eaffa0c7d33';
 
 /// See also [getCities].
 @ProviderFor(getCities)
@@ -220,7 +220,7 @@ class GetCitiesFamily extends Family<AsyncValue<List<dynamic>>> {
 }
 
 /// See also [getCities].
-class GetCitiesProvider extends AutoDisposeFutureProvider<List<dynamic>> {
+class GetCitiesProvider extends FutureProvider<List<dynamic>> {
   /// See also [getCities].
   GetCitiesProvider(
     String countryId,
@@ -277,7 +277,7 @@ class GetCitiesProvider extends AutoDisposeFutureProvider<List<dynamic>> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<List<dynamic>> createElement() {
+  FutureProviderElement<List<dynamic>> createElement() {
     return _GetCitiesProviderElement(this);
   }
 
@@ -300,7 +300,7 @@ class GetCitiesProvider extends AutoDisposeFutureProvider<List<dynamic>> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin GetCitiesRef on AutoDisposeFutureProviderRef<List<dynamic>> {
+mixin GetCitiesRef on FutureProviderRef<List<dynamic>> {
   /// The parameter `countryId` of this provider.
   String get countryId;
 
@@ -308,8 +308,8 @@ mixin GetCitiesRef on AutoDisposeFutureProviderRef<List<dynamic>> {
   String? get stateId;
 }
 
-class _GetCitiesProviderElement
-    extends AutoDisposeFutureProviderElement<List<dynamic>> with GetCitiesRef {
+class _GetCitiesProviderElement extends FutureProviderElement<List<dynamic>>
+    with GetCitiesRef {
   _GetCitiesProviderElement(super.provider);
 
   @override
@@ -317,5 +317,23 @@ class _GetCitiesProviderElement
   @override
   String? get stateId => (origin as GetCitiesProvider).stateId;
 }
+
+String _$getCountriesCodeHash() => r'629dc0462ab9cc21df7baa5e936a32aa90da8ca7';
+
+/// See also [getCountriesCode].
+@ProviderFor(getCountriesCode)
+final getCountriesCodeProvider = FutureProvider<List<dynamic>>.internal(
+  getCountriesCode,
+  name: r'getCountriesCodeProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getCountriesCodeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetCountriesCodeRef = FutureProviderRef<List<dynamic>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

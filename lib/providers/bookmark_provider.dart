@@ -14,6 +14,6 @@ class BookmarkNotifier extends StateNotifier<List<ProductModel0>> {
   }
 }
 
-final bookmarkProvider = StateNotifierProvider<BookmarkNotifier, List<ProductModel0>>((ref) {
+final bookmarkProvider = StateNotifierProvider<BookmarkNotifier, List<ProductModel0>>((Ref ref) {
   return BookmarkNotifier();
 });

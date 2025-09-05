@@ -1,12 +1,11 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:shop/data/services/auth_services.dart';
-import 'package:shop/models/brand_model.dart';
-import 'package:shop/models/category_model.dart';
+import 'package:shop/data/services/auth_services.dart'; 
 import 'package:shop/models/user_model.dart';
 part 'auth_repository.g.dart';
 
 @riverpod
-AuthRepository authRepo(ref) {
+AuthRepository authRepo(Ref ref) {
   return AuthRepository();
 }
 
@@ -65,21 +64,4 @@ class AuthRepository {
     }
   }
 
-  Future<List<Category>> fetchCategories() async {
-    try {
-      return await authService.getCategory();
-    } catch (e) {
-      print('Error fetching categories: $e');
-      throw Exception('Failed to fetch categories: $e');
-    }
-  }
-
-  Future<List<Brand>> fetchBrands() async {
-    try {
-      return await authService.getBrand();
-    } catch (e) {
-      print('Error fetching categories: $e');
-      throw Exception('Failed to fetch categories: $e');
-    }
-  }
 }

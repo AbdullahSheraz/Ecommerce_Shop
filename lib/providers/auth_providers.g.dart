@@ -6,11 +6,11 @@ part of 'auth_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userProfileHash() => r'9b41bae176918993da86c0f6f6044bfe74dd0130';
+String _$userProfileHash() => r'e05ce3c51b74ce402b755c1b175f6048311b4f04';
 
 /// See also [userProfile].
 @ProviderFor(userProfile)
-final userProfileProvider = AutoDisposeFutureProvider<UserModel>.internal(
+final userProfileProvider = FutureProvider<UserModel>.internal(
   userProfile,
   name: r'userProfileProvider',
   debugGetCreateSourceHash:
@@ -21,39 +21,7 @@ final userProfileProvider = AutoDisposeFutureProvider<UserModel>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef UserProfileRef = AutoDisposeFutureProviderRef<UserModel>;
-String _$categoriesHash() => r'11ef38f9afb1a5925c83b4b22a92785f73a23d4d';
-
-/// See also [categories].
-@ProviderFor(categories)
-final categoriesProvider = AutoDisposeFutureProvider<List<Category>>.internal(
-  categories,
-  name: r'categoriesProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$categoriesHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef CategoriesRef = AutoDisposeFutureProviderRef<List<Category>>;
-String _$brandsHash() => r'a83ffd3651e5f458397d9cbdf2f5b2e1e4b7cf08';
-
-/// See also [brands].
-@ProviderFor(brands)
-final brandsProvider = AutoDisposeFutureProvider<List<Brand>>.internal(
-  brands,
-  name: r'brandsProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$brandsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef BrandsRef = AutoDisposeFutureProviderRef<List<Brand>>;
+typedef UserProfileRef = FutureProviderRef<UserModel>;
 String _$authProvidersHash() => r'7125a45b125566fc12d741036d42338838688397';
 
 /// See also [AuthProviders].

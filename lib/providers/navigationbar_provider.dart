@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final navigationProvider = StateNotifierProvider<NavigationNotifier, int>(
-  (ref) => NavigationNotifier(),
+  (Ref ref) => NavigationNotifier(),
 );
 
 class NavigationNotifier extends StateNotifier<int> {

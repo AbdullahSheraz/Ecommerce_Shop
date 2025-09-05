@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:shop/providers/auth_providers.dart';
+import 'package:shop/providers/product_providers.dart';
 
 class BrandsGrid extends ConsumerWidget {
   const BrandsGrid({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final brandsAsync = ref.watch(brandsProvider);
+    final brandsAsync = ref.watch(getBrandsProvider);
 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: Icon(LucideIcons.chevronLeft),
-        title: Text('Browse Brands'),
+        leading:const  Icon(LucideIcons.chevronLeft),
+        title:const  Text('Browse Brands'),
       ),
       body: brandsAsync.when(
         data: (brands) {
@@ -27,18 +27,17 @@ class BrandsGrid extends ConsumerWidget {
                 children: brands.map((brand) {
                   return InkWell(
                     onTap: () {
-                      // handle brand tap
-                    },
+                     },
                     borderRadius: BorderRadius.circular(16),
                     child: Container(
                       width: MediaQuery.of(context).size.width / 2 -
-                          24, // 2 per row
+                          24,  
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
+                            color: Colors.black.withValues(alpha: 0.05),
                             blurRadius: 5,
                             offset: const Offset(2, 2),
                           ),

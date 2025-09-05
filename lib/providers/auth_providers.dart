@@ -1,7 +1,6 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:shop/data/repository/auth_repository.dart';
-import 'package:shop/models/brand_model.dart';
-import 'package:shop/models/category_model.dart';
+import 'package:shop/data/repository/auth_repository.dart'; 
 import 'package:shop/models/user_model.dart';
 
 part 'auth_providers.g.dart';
@@ -35,22 +34,11 @@ class AuthProviders extends _$AuthProviders {
 
     return result;
   }
-  
 }
 
-@riverpod
-Future<UserModel> userProfile(UserProfileRef ref) async {
+@Riverpod(keepAlive: true)
+Future<UserModel> userProfile( Ref ref) async {
   final repo = ref.read(authRepoProvider);
   return await repo.userInfo();
 }
-
-@riverpod
-Future<List<Category>> categories(CategoriesRef ref) async {
-  final repo = ref.read(authRepoProvider); 
-  return await repo.fetchCategories();
-}
-@riverpod
-Future<List<Brand>> brands(BrandsRef ref) async {
-  final repo = ref.read(authRepoProvider); 
-  return await repo.fetchBrands();
-}
+ 

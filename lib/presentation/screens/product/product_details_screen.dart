@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shop/models/item_model.dart';
 
 import 'package:shop/presentation/components/cart_button.dart';
 import 'package:shop/core/constants/constants.dart';
@@ -231,7 +232,7 @@ import 'package:shop/presentation/screens/product/views/components/product_list_
 class ProductDetailsScreen extends ConsumerWidget {
   const ProductDetailsScreen({
     super.key,
-    required this.image,
+    required this.images,
      this.title='',
     this.product,
     this.tilesProducts = const [],
@@ -241,7 +242,7 @@ class ProductDetailsScreen extends ConsumerWidget {
     this.isProductAvailable = true,
   });
 
-  final String image;
+  final List<String> images; 
   final String title;
 
   final String description;
@@ -249,8 +250,8 @@ class ProductDetailsScreen extends ConsumerWidget {
   final double discPrice;
   final bool isProductAvailable;
 
-  final ProductModel0? product;
-  final List<ProductModel0> tilesProducts;
+  final Item? product;
+  final List<Item> tilesProducts;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -264,9 +265,9 @@ class ProductDetailsScreen extends ConsumerWidget {
               press: () {
                 cartNotifier.addToCart(
                   CartItem(
-                    image: image,
-                    price: price,
-                    discountPrice: discPrice,
+                    image: images.first,
+                    price: price.toString(),
+                    discountPrice: discPrice.toString(),
                     brandName: title,
                     title: title,
                   ),
@@ -288,7 +289,7 @@ class ProductDetailsScreen extends ConsumerWidget {
               actions: [
                 IconButton(
                   onPressed: () {
-                    ref.read(bookmarkProvider.notifier).toggleBookmark(product!);
+                   // ref.read(bookmarkProvider.notifier).toggleBookmark(product as ProductModel0);
                   },
                   icon: Consumer(
                     builder: (context, ref, child) {
@@ -307,7 +308,7 @@ class ProductDetailsScreen extends ConsumerWidget {
               ],
             ),
 
-            ProductImages(images: [image]),
+            ProductImages(images: [images.first]),
 
             ProductInfo(
               brand: title,

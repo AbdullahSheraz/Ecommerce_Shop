@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -23,8 +22,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   TextEditingController emailC = TextEditingController();
   TextEditingController passC = TextEditingController();
 
+  bool isLoading = false;
+
   Future<void> authenticateUser(BuildContext context, WidgetRef ref) async {
     if (formKey.currentState!.validate()) {
+      setState(() => isLoading = true);
+
       final body = {
         "email": emailC.text.trim(),
         "password": passC.text.trim(),
@@ -33,8 +36,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       final auth = ref.read(authProvidersProvider.notifier);
       final result = await auth.loginUser(body);
 
-      if (result["success"] == true ||
-          result["message"] == "Login successful") {
+      setState(() => isLoading = false);
+
+      if (result["success"] == true || result["message"] == "Login successful") {
         final userId = result["userid"].toString();
         final token = result["token"] ?? "";
         if (token.isEmpty) {
@@ -52,7 +56,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         context.goNamed('dum');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(result["message"])),
+          SnackBar(content: Text(result["message"])),
         );
       }
     }
@@ -62,8 +66,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     const chars =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     final rand = Random();
-    return List.generate(length, (index) => chars[rand.nextInt(chars.length)])
-        .join();
+    return List.generate(length, (index) => chars[rand.nextInt(chars.length)]).join();
   }
 
   @override
@@ -87,15 +90,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   children: [
                     const Align(
                       alignment: Alignment.center,
-                      child: Text("LOGIN UI",
-                          style: TextStyle(
-                              fontSize: 28, fontWeight: FontWeight.w600)),
+                      child: Text(
+                        "LOGIN UI",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                     gapH8,
                     const Text(
-                        "Log in with your data that you intered during your registration.",
-                        style: TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.w600)),
+                      "Log in with your data that you entered during your registration.",
+                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                    ),
                     gapH32,
                     LogInForm(
                       formKey: formKey,
@@ -109,36 +116,50 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         child: const Text(
                           "Forgot password",
                           style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              color: Colors.black87),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            color: Colors.black87,
+                          ),
                         ),
                         onTap: () {
-                          context.pushNamed(
-                              RoutesName.passwordRecoveryScreenRoute);
+                          context.pushNamed(RoutesName.passwordRecoveryScreenRoute);
                         },
                       ),
                     ),
                     gapH64,
                     InkWell(
-                      onTap: () async {
-                        await authenticateUser(context, ref);
-                      },
+                      onTap: isLoading
+                          ? null
+                          : () async {
+                              await authenticateUser(context, ref);
+                            },
                       child: Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: primaryColor),
-                          child: const Center(
-                            child: Text(
-                              "LOGIN",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          )),
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: primaryColor.withOpacity(isLoading ? 0.7 : 1),
+                        ),
+                        child: Center(
+                          child: isLoading
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                              : const Text(
+                                  "LOGIN",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                        ),
+                      ),
                     ),
                     gapH20,
                     Row(
@@ -147,7 +168,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         const Text(
                           "Don't have an account?",
                           style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.w400),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                         gapW4,
                         InkWell(
@@ -155,11 +178,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             context.pushNamed(RoutesName.signUpScreenRoute);
                           },
                           child: const Text(
-                            "Sign up",
+                            "Register",
                             style: TextStyle(
-                                color: primaryColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400),
+                              color: primaryColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         )
                       ],

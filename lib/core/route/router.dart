@@ -1,147 +1,10 @@
-// import 'package:flutter/material.dart';
-// import 'package:shop/entry_point.dart';
 
-// import 'screen_export.dart';
-
-// Route<dynamic> generateRoute(RouteSettings settings) {
-//   switch (settings.name) {
-//     case onbordingScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const OnBordingScreen(),
-//       );
-//     case logInScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const LoginScreen(),
-//       );
-//     case signUpScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const SignUpScreen(),
-//       );
-
-//     case passwordRecoveryScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const PasswordRecoveryScreen(),
-//       );
-//       case searchroute:
-//       return MaterialPageRoute(
-//         builder: (context) => EntryPoint(initialIndex: 1,),
-//       );
-//        case cartroute:
-//       return MaterialPageRoute(
-//         builder: (context) => EntryPoint(initialIndex: 3,),
-//       );
-
-//     case dummyroute:
-//       return MaterialPageRoute(
-//         builder: (context) => EntryPoint(initialIndex: 1, text: "Tiles"),
-//       );
-//       case dummyroute2:
-//       return MaterialPageRoute(
-//         builder: (context) => EntryPoint(initialIndex: 1, text: "Floor Tiles"),
-//       );
-//       case dummyroute1:
-//       return MaterialPageRoute(
-//         builder: (context) => EntryPoint(initialIndex: 1, text: "Bathroom Tiles"),
-//       );
-//       case dummyroute3:
-//       return MaterialPageRoute(
-//         builder: (context) => EntryPoint(initialIndex: 1, text: "Imported Tiles"),
-//       );case dummyroute4:
-//       return MaterialPageRoute(
-//         builder: (context) => EntryPoint(initialIndex: 1, text: "Sanitary Ware"),
-//       );
-//     case productReviewsScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const ProductReviewsScreen(),
-//       );
-//     case homeScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const HomeScreen(),
-//       );
-//     case discoverScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const DiscoverScreen(),
-//       );
-//     case onSaleScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const OnSaleScreen(),
-//       );
-//     case kidsScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const KidsScreen(),
-//       );
-//     case searchScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const SearchScreen(),
-//       );
-//     case bookmarkScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const BookmarkScreen(),
-//       );
-//     case entryPointScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) =>  EntryPoint(),
-//       );
-//     case profileScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const ProfileScreen(),
-//       );
-//     case userInfoScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const UserInfoScreen(),
-//       );
-//     case notificationsScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const NotificationsScreen(),
-//       );
-//     case noNotificationScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const NoNotificationScreen(),
-//       );
-//     case enableNotificationScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const EnableNotificationScreen(),
-//       );
-//     case notificationOptionsScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const NotificationOptionsScreen(),
-//       );
-//     case addressesScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const AddressesScreen(),
-//       );
-//     case ordersScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const OrdersScreen(),
-//       );
-//     case preferencesScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const PreferencesScreen(),
-//       );
-//     case emptyWalletScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const EmptyWalletScreen(),
-//       );
-//     case walletScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const WalletScreen(),
-//       );
-//     case cartScreenRoute:
-//       return MaterialPageRoute(
-//         builder: (context) => const CartScreen(),
-//       );
-//     default:
-//       return MaterialPageRoute(
-//         builder: (context) => const OnBordingScreen(),
-//       );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop/data/services/auth_local_storage_services.dart';
 import 'package:shop/entry_point.dart';
-import 'package:shop/presentation/screens/home/views/components/brandsGridView.dart';
-import 'package:shop/presentation/screens/home/views/components/gridViewCategories.dart';
+import 'package:shop/presentation/screens/home/views/components/brands/brandsGridView.dart';
+import 'package:shop/presentation/screens/home/views/components/categories/gridViewCategories.dart';
 import 'screen_export.dart';
 
 final GoRouter router = GoRouter(
@@ -181,7 +44,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RoutesPath.signUpScreenPath,
       name: RoutesName.signUpScreenRoute,
-      pageBuilder: (context, state) => _buildPage(const SignUpScreen()),
+      pageBuilder: (context, state) => _buildPage(const RegisterScreen()),
     ),
     GoRoute(
       path: RoutesPath.passwordRecoveryScreenPath,

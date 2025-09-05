@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shop/core/constants/constants.dart';
 import 'package:shop/core/constants/route_constants.dart';
-import 'package:shop/presentation/screens/home/views/components/brands_category.dart';
-import 'package:shop/presentation/screens/home/views/components/gridViewCategories.dart';
-import 'categories.dart';
+import 'package:shop/presentation/screens/home/views/components/brands/brands_category.dart';
+ import 'categories/categories.dart';
 import 'offers_carousel.dart';
 
 class OffersCarouselAndCategories extends StatelessWidget {

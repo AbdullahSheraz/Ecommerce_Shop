@@ -1,16 +1,15 @@
-import 'dart:convert';
-import 'dart:math';
-
+ 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:shop/data/JsonData.dart';
+ import 'package:shop/models/item_model.dart';
 import 'package:shop/presentation/components/product/secondary_product_card.dart';
 import 'package:shop/core/constants/constants.dart';
 import 'package:shop/core/constants/app_sizes.dart';
-import 'package:shop/models/product_model.dart';
-import 'package:shop/providers/cart_item_provider.dart';
+ import 'package:shop/providers/cart_item_provider.dart';
 import 'package:shop/presentation/screens/checkout/components/review_payment.dart';
+import 'package:shop/providers/product_providers.dart';
 
 class CartScreen extends ConsumerStatefulWidget {
   const CartScreen({super.key});
@@ -20,25 +19,24 @@ class CartScreen extends ConsumerStatefulWidget {
 }
 
 class _CartScreenState extends ConsumerState<CartScreen> {
-  late List<ProductModel0> allProducts;
+  late List<Item> allProducts;
 
   @override
   void initState() {
     super.initState();
-    final parsed = jsonDecode(jsonData) as List<dynamic>;
-    allProducts = parsed.map((e) => ProductModel0.fromJson(e)).toList();
-    allProducts.shuffle(Random());
   }
 
   @override
   Widget build(BuildContext context) {
+    final asyncProducts = ref.watch(getItemsProvider('0', '0'));
+
     final cartItems = ref.watch(cartProvider);
     double totalPrice = 0.0;
 
     for (var item in cartItems) {
-      totalPrice += item.price * item.quantity;
+      final price = double.tryParse(item.price) ?? 0.0;
+      totalPrice += price * item.quantity;
     }
-
     return Scaffold(
       body: RefreshIndicator(
         color: primaryColor,
@@ -89,8 +87,8 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                                   contentPadding: EdgeInsets.zero,
                                   leading: ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
-                                    child: Image.asset(
-                                      item.image,
+                                    child: CachedNetworkImage(
+                                      imageUrl: item.image,
                                       width: 50,
                                       height: 50,
                                       fit: BoxFit.contain,
@@ -180,25 +178,46 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 85,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: allProducts.length,
-                      padding: const EdgeInsets.only(left: 16),
-                      itemBuilder: (context, index) {
-                        final product = allProducts[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: SecondaryProductCard(
-                            onPress: () {},
-                            image: product.image,
-                            brandName: "",
-                            title: product.title,
-                            price: product.price,
-                          ),
-                        );
-                      },
+                  asyncProducts.when(
+                    data: (allProducts) {
+                      if (allProducts.isEmpty) {
+                        return const Center(child: Text("No products found"));
+                      }
+
+                      return SizedBox(
+                        height: 85,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: allProducts.length,
+                          padding: const EdgeInsets.only(left: 16),
+                          itemBuilder: (context, index) {
+                            final product = allProducts[index];
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: SecondaryProductCard(
+                                onPress: () {
+                                },
+                                images: [
+                                  product.images.isNotEmpty
+                                      ? product.images.first.src
+                                      : ''
+                                ],
+                                brandName: product.brand,
+                                title: product.description,
+                                price: product.price,
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    loading: () => const SizedBox(
+                      height: 85,
+                      child: Center(child: CircularProgressIndicator()),
+                    ),
+                    error: (err, _) => SizedBox(
+                      height: 85,
+                      child: Center(child: Text("Error: $err")),
                     ),
                   ),
                   Padding(

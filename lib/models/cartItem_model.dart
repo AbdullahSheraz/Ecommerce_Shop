@@ -4,8 +4,8 @@ class CartItem {
   final String image;
   final String brandName;
   final String title;
-  final double price;
-  final double discountPrice;
+  final String price;
+  final String discountPrice;
   int quantity;
 
   CartItem({

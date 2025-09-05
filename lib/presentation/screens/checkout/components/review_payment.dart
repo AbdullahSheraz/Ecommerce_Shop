@@ -320,6 +320,7 @@
 //     );
 //   }
 // }
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -331,7 +332,7 @@ import 'package:shop/providers/cart_item_provider.dart';
 
 class ReviewScreen extends ConsumerStatefulWidget {
   final double totalAmount;
-const  ReviewScreen({super.key, required this.totalAmount});
+  const ReviewScreen({super.key, required this.totalAmount});
 
   @override
   ConsumerState<ReviewScreen> createState() => _ReviewScreenState();
@@ -534,15 +535,17 @@ Your Shop App
   """;
 
     for (var item in cartItems) {
-      double itemTotal = item.price * item.quantity;
+      double price = double.tryParse(item.price) ?? 0.0;
+      double itemTotal = price * item.quantity;
+
       cartTable += """
-      <tr>
-        <td>${item.title}</td>
-        <td align="center">${item.quantity}</td>
-        <td align="right">Rs. ${item.price.toStringAsFixed(2)}</td>
-        <td align="right">Rs. ${itemTotal.toStringAsFixed(2)}</td>
-      </tr>
-    """;
+    <tr>
+      <td>${item.title}</td>
+      <td align="center">${item.quantity}</td>
+      <td align="right">Rs. ${price.toStringAsFixed(2)}</td>
+      <td align="right">Rs. ${itemTotal.toStringAsFixed(2)}</td>
+    </tr>
+  """;
     }
 
     cartTable += """
@@ -603,7 +606,7 @@ Your Shop App
     try {
       await send(message, smtpServer);
       ScaffoldMessenger.of(context).showSnackBar(
-      const   SnackBar(content: Text("✅ Order Sent")),
+        const SnackBar(content: Text("✅ Order Sent")),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -644,8 +647,8 @@ Your Shop App
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.asset(
-                        item.image,
+                      child: CachedNetworkImage(
+                        imageUrl: item.image,
                         width: 40,
                         height: 40,
                         fit: BoxFit.contain,
@@ -761,13 +764,13 @@ Your Shop App
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.grey.withValues(alpha:  0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.grey.withValues(alpha:  0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
             width: 1.5,
           ),
         ),

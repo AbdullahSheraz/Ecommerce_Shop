@@ -1,8 +1,9 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shop/data/services/common_services.dart';
 part 'common_repository.g.dart';
 @riverpod
-CommonRepository commonRepository(ref) {
+CommonRepository commonRepository(Ref ref) {
   return CommonRepository();
 }
 
@@ -20,4 +21,8 @@ class CommonRepository {
   Future<List<dynamic>> getCities(String countryId,String stateId) async {
     return await commonService.fetchCities(countryId,stateId);
   }
+    Future<List<dynamic>> getCountriesCode() async {
+    return await commonService.getCountriesCode();
+  }
+
 }

@@ -1,16 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shop/core/constants/constants.dart';
 import 'package:shop/core/constants/app_sizes.dart';
 import 'package:shop/core/constants/colors.dart' as colors;
 import 'package:shop/models/cartItem_model.dart';
-import 'package:shop/models/product_model.dart';
+import 'package:shop/models/item_model.dart';
 import 'package:shop/providers/cart_item_provider.dart';
 
 class ProductCard extends ConsumerWidget {
   const ProductCard({
     super.key,
-    required this.image,
+    required this.images,
     this.product,
     required this.brandName,
     this.onTapButton,
@@ -19,9 +20,10 @@ class ProductCard extends ConsumerWidget {
     required this.press,
   });
 
-  final String image, brandName, title;
+  final String brandName, title;
   final double price;
-  final ProductModel0? product;
+  final List<String> images;
+  final Item? product;
   final Function? onTapButton;
 
   final VoidCallback press;
@@ -33,9 +35,9 @@ class ProductCard extends ConsumerWidget {
     final cartItem = cartItems.firstWhere(
       (item) => item.title == title,
       orElse: () => CartItem(
-        image: image,
-        price: price,
-        discountPrice: price,
+        image: images.isNotEmpty ? images.first : "",
+        price: price.toString(),
+        discountPrice: price.toString(),
         brandName: brandName,
         title: title,
         quantity: 0,
@@ -65,33 +67,35 @@ class ProductCard extends ConsumerWidget {
                     child: ClipRRect(
                       borderRadius:
                           const BorderRadius.vertical(top: Radius.circular(16)),
-                      child: Image.asset(image,
-                          fit: BoxFit.contain, width: double.infinity),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.contain,
+                        width: double.infinity,
+                        imageUrl: images.isNotEmpty ? images.first : '',
+                      ),
                     ),
+                    // if (discountPercent != null)
+                    //   Positioned(
+                    //     right: defaultPadding / 2,
+                    //     top: defaultPadding / 2,
+                    //     child: Container(
+                    //       padding: const EdgeInsets.symmetric(
+                    //           horizontal: 4, vertical: 2),
+                    //       decoration: const BoxDecoration(
+                    //         color: errorColor,
+                    //         borderRadius: BorderRadius.all(
+                    //             Radius.circular(defaultBorderRadious)),
+                    //       ),
+                    //       child: Center(
+                    //         child: Text(
+                    //           "$discountPercent% off",
+                    //           style: const TextStyle(
+                    //               color: Colors.white,
+                    //               fontSize: 10,
+                    //               fontWeight: FontWeight.w500),
+                    //         ),
+                    //       ),
+                    //     ),
                   ),
-                  // if (discountPercent != null)
-                  //   Positioned(
-                  //     right: defaultPadding / 2,
-                  //     top: defaultPadding / 2,
-                  //     child: Container(
-                  //       padding: const EdgeInsets.symmetric(
-                  //           horizontal: 4, vertical: 2),
-                  //       decoration: const BoxDecoration(
-                  //         color: errorColor,
-                  //         borderRadius: BorderRadius.all(
-                  //             Radius.circular(defaultBorderRadious)),
-                  //       ),
-                  //       child: Center(
-                  //         child: Text(
-                  //           "$discountPercent% off",
-                  //           style: const TextStyle(
-                  //               color: Colors.white,
-                  //               fontSize: 10,
-                  //               fontWeight: FontWeight.w500),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
                 ],
               ),
             ),
@@ -209,9 +213,9 @@ class ProductCard extends ConsumerWidget {
                 onTap: () {
                   ref.read(cartProvider.notifier).addToCart(
                         CartItem(
-                          image: image,
-                          price: price,
-                          discountPrice: price,
+                          image: images.isNotEmpty ? images.first : "",
+                          price: price.toString(),
+                          discountPrice: price.toString(),
                           brandName: brandName,
                           title: title,
                         ),

@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final authProvider = StateNotifierProvider<AuthState, bool>((ref) {
+final authProvider = StateNotifierProvider<AuthState, bool>((Ref ref) {
   return AuthState();
 });
 

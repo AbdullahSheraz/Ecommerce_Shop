@@ -5,7 +5,7 @@ import 'package:shop/config/api_config.dart';
 class CommonService {
   Future<List<dynamic>> fetchCountries() async {
     final response = await http.get(Uri.parse(getCountry));
-     if (response.statusCode == 200) {
+    if (response.statusCode == 200) {
       final decoded = jsonDecode(response.body);
       return decoded['countries'] ?? [];
     } else {
@@ -38,4 +38,18 @@ class CommonService {
       throw Exception("Failed to load cities");
     }
   }
+
+ Future<List<dynamic>> getCountriesCode() async {
+  final response = await http.get(Uri.parse(getCountryCode));
+  if (response.statusCode == 200) {
+    print("📥 Status 200 OK");
+    print("📥 Raw Body: ${response.body}");
+    final decoded = jsonDecode(response.body);
+
+     return decoded['codes'] ?? [];
+  } else {
+    throw Exception("Failed to load countries");
+  }
+}
+
 }

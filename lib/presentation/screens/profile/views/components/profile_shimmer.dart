@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:shop/core/constants/app_sizes.dart';
-
+ 
 class ProfileCardShimmer extends StatelessWidget {
   const ProfileCardShimmer({super.key});
 

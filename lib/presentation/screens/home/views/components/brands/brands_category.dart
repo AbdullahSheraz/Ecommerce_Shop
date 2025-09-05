@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shop/providers/auth_providers.dart'; 
-import 'package:shop/core/constants/app_sizes.dart';
+ import 'package:shop/core/constants/app_sizes.dart';
+import 'package:shop/providers/product_providers.dart';
  
-class Categories extends ConsumerWidget {
-  const Categories({super.key});
+class BrandsCategory extends ConsumerWidget {
+  const BrandsCategory({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoriesAsync = ref.watch(categoriesProvider);
+    final brandAsync = ref.watch(getBrandsProvider);
 
-    return categoriesAsync.when(
+    return brandAsync.when(
       data: (categories) {
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: categories.map((category) {
-              final isActive = false; // or use your selectedCategory logic
-              return Padding(
+               return Padding(
                 padding: const EdgeInsets.only(left: 18),
                 child: InkWell(
                   onTap: () {
-                    // handle tap
+                 
                   },
                   borderRadius: const BorderRadius.all(Radius.circular(35)),
                   child: Column(
@@ -33,7 +32,7 @@ class Categories extends ConsumerWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
-                          border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                          border: Border.all(color: Colors.grey.withValues(alpha:  0.5)),
                           image: category.imageUrl != null
                               ? DecorationImage(
                                   image: NetworkImage(category.imageUrl!),

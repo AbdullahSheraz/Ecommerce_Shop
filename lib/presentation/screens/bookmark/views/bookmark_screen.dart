@@ -39,7 +39,7 @@ class _BookmarkScreenState extends ConsumerState<BookmarkScreen> {
                   itemBuilder: (context, index) {
                     final product = bookmarks[index];
                     return ProductCard(
-                      image: product.image,
+                      images:  [product.image],
                       title: product.title,
                       brandName: product.brandName ?? '',
                       price: product.price,

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:shop/core/constants/app_sizes.dart';
 import 'package:shop/core/constants/constants.dart';
 
-class LogInForm extends StatelessWidget {
+class LogInForm extends StatefulWidget {
   final TextEditingController emailC, passC;
+  final GlobalKey<FormState> formKey;
+
   const LogInForm({
     super.key,
     required this.formKey,
@@ -12,7 +15,12 @@ class LogInForm extends StatelessWidget {
     required this.passC,
   });
 
-  final GlobalKey<FormState> formKey;
+  @override
+  State<LogInForm> createState() => _LogInFormState();
+}
+
+class _LogInFormState extends State<LogInForm> {
+  bool obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +28,7 @@ class LogInForm extends StatelessWidget {
         Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.15);
 
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: Column(
         children: [
           const Align(
@@ -32,10 +40,7 @@ class LogInForm extends StatelessWidget {
           ),
           gapH4,
           TextFormField(
-            controller: emailC,
-            onSaved: (email) {
-              // Save email
-            },
+            controller: widget.emailC,
             validator: emaildValidator.call,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
@@ -83,10 +88,9 @@ class LogInForm extends StatelessWidget {
           ),
           gapH4,
           TextFormField(
-            controller: passC,
-            onSaved: (pass) {},
+            controller: widget.passC,
             validator: passwordValidator.call,
-            obscureText: true,
+            obscureText: obscurePassword,
             cursorColor: primaryColor,
             decoration: InputDecoration(
               hintText: "**********",
@@ -100,6 +104,18 @@ class LogInForm extends StatelessWidget {
                   width: 24,
                   colorFilter: ColorFilter.mode(baseGrey, BlendMode.srcIn),
                 ),
+              ),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  obscurePassword ? LucideIcons.eye : LucideIcons.eyeOff,
+                  color: Colors.grey.withValues(alpha: 0.5),
+                  size: 23,
+                ),
+                onPressed: () {
+                  setState(() {
+                    obscurePassword = !obscurePassword;
+                  });
+                },
               ),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: baseGrey),

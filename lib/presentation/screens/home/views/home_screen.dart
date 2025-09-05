@@ -76,7 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SliverToBoxAdapter(child: OffersCarouselAndCategories()),
 
-              const SliverToBoxAdapter(child: PopularProducts()),
+              const SliverToBoxAdapter(
+                  child: PopularProducts(
+              )),
 
               // const SliverPadding(
               //   padding: EdgeInsets.symmetric(vertical: defaultPadding * 1.5),
@@ -95,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              const SliverToBoxAdapter(child: MostPopular()),
+            const SliverToBoxAdapter(child: MostPopular()),
 
               // SliverToBoxAdapter(
               //   child: Column(

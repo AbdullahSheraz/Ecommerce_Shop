@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shop/core/constants/app_sizes.dart';
+import 'package:shop/core/constants/colors.dart';
 import 'package:shop/providers/common_providers.dart';
 
 final selectedCountryProvider = StateProvider<String?>((ref) => null);
@@ -80,17 +81,20 @@ class CountryStateCityDropdown extends ConsumerWidget {
             },
           ),
           loading: () => Container(
-            height: 50,
+            height: 45,
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade400),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(12),
             ),
             alignment: Alignment.center,
-            child: const SizedBox(
+            child: SizedBox(
               height: 24,
               width: 24,
-              child: CircularProgressIndicator(strokeWidth: 2),
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: primaryColor,
+              ),
             ),
           ),
           error: (e, _) => Container(
@@ -98,10 +102,10 @@ class CountryStateCityDropdown extends ConsumerWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.red.shade400),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(12),
             ),
             alignment: Alignment.center,
-            child: Text("Error loading countries",
+            child: const Text("Error loading countries",
                 style: TextStyle(color: Colors.red)),
           ),
         ),
@@ -126,17 +130,20 @@ class CountryStateCityDropdown extends ConsumerWidget {
             },
           ),
           loading: () => Container(
-            height: 50,
+            height: 45,
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade400),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(12),
             ),
             alignment: Alignment.center,
-            child: const SizedBox(
+            child: SizedBox(
               height: 24,
               width: 24,
-              child: CircularProgressIndicator(strokeWidth: 2),
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: primaryColor,
+              ),
             ),
           ),
           error: (e, _) => Container(
@@ -144,7 +151,7 @@ class CountryStateCityDropdown extends ConsumerWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.red.shade400),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(12),
             ),
             alignment: Alignment.center,
             child: const Text("Error loading state",
@@ -171,17 +178,20 @@ class CountryStateCityDropdown extends ConsumerWidget {
             },
           ),
           loading: () => Container(
-            height: 50,
+            height: 45,
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade400),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(12),
             ),
             alignment: Alignment.center,
-            child: const SizedBox(
+            child: SizedBox(
               height: 24,
               width: 24,
-              child: CircularProgressIndicator(strokeWidth: 2),
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: primaryColor,
+              ),
             ),
           ),
           error: (e, _) => Container(
@@ -189,7 +199,7 @@ class CountryStateCityDropdown extends ConsumerWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.red.shade400),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(12),
             ),
             alignment: Alignment.center,
             child: const Text("Error loading cities",
